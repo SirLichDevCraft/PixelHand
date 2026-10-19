@@ -9,13 +9,15 @@ async function main(argv) {
   for (let i = 0; i < argv.length; i += 2) {
     if (!argv[i].startsWith("--") || !argv[i + 1])
       throw new Error(
-        "Expected --config file [--brief file --root directory --out transcript.json --resume transcript.json]",
+        "Expected --config file [--quality-effort low|medium|high --brief file --root directory --out transcript.json --resume transcript.json]",
       );
     args[argv[i].slice(2)] = argv[i + 1];
   }
   if (!args.config)
     throw new Error("Pass --config with an inference configuration JSON file");
   const config = JSON.parse(fs.readFileSync(args.config, "utf8"));
+  if (args["quality-effort"] !== undefined)
+    config.quality_effort = args["quality-effort"];
   if (args.doctor === "true") {
     console.log(JSON.stringify(await createProvider(config).probe(), null, 2));
     return;
@@ -42,6 +44,13 @@ async function main(argv) {
       JSON.stringify(
         {
           status: result.status,
+          quality_effort: result.quality?.effort,
+          quality_passes: result.quality
+            ? {
+                completed: result.quality.completed_passes,
+                required: result.quality.required_passes,
+              }
+            : undefined,
           rounds: result.rounds,
           calls: result.calls,
           errors: result.errors,

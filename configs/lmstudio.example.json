@@ -4,6 +4,7 @@
   "model": "REPLACE_WITH_LOADED_MODEL",
   "local_only": true,
   "vision": false,
+  "quality_effort": "medium",
   "toolset": "core",
   "timeout_ms": 60000,
   "max_output_tokens": 2048,

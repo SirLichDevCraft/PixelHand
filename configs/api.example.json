@@ -4,6 +4,7 @@
   "api_key_env": "PIXELHAND_API_KEY",
   "model": "REPLACE_WITH_MODEL_NAME",
   "vision": true,
+  "quality_effort": "medium",
   "toolset": "core",
   "timeout_ms": 60000,
   "max_output_tokens": 2048,

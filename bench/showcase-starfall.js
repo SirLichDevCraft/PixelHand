@@ -157,7 +157,7 @@ pine(114, 118, 18, 1); pine(143, 119, 12, 1);
 line(131, 129, 130, 153, "accent.2"); line(133, 127, 133, 141, "cloud.1");
 
 // 3. Main island: top plane, fractured rock planes, roots, and mineral seams.
-poly([[167, 148], [188, 139], [223, 141], [257, 135], [310, 142], [340, 151], [346, 166], [330, 177], [314, 178], [304, 199], [289, 188], [274, 209], [263, 215], [248, 201], [240, 188], [219, 199], [209, 184], [191, 183], [181, 169], [169, 165]], "night.0");
+poly([[153, 145], [180, 135], [216, 135], [257, 130], [310, 136], [344, 147], [352, 162], [330, 177], [314, 178], [304, 199], [289, 188], [274, 209], [263, 215], [248, 201], [240, 188], [219, 199], [209, 184], [191, 183], [177, 170], [160, 163]], "night.0");
 poly([[177, 158], [211, 158], [238, 169], [225, 187], [216, 193], [207, 176], [188, 178]], "stone.1");
 poly([[211, 160], [251, 160], [265, 177], [258, 206], [248, 195], [236, 181]], "stone.0");
 poly([[258, 160], [285, 158], [302, 169], [282, 190], [272, 207], [263, 211], [267, 179]], "stone.1");
@@ -183,9 +183,9 @@ for (const [points, color] of [
 ]) poly(points, color);
 chain([[286, 176], [289, 181], [285, 187]], "night.0");
 chain([[238, 178], [236, 183], [239, 189]], "night.0");
-ellipse(255, 152, 87, 17, "moss.0");
-poly([[174, 150], [191, 143], [216, 143], [236, 140], [268, 142], [295, 141], [326, 149], [337, 155], [315, 160], [291, 159], [267, 162], [239, 159], [220, 163], [197, 158], [181, 159]], "moss.1");
-poly([[179, 148], [193, 143], [215, 144], [229, 142], [235, 145], [216, 148], [199, 148], [190, 153]], "moss.3");
+ellipse(253, 150, 99, 21, "moss.0");
+poly([[158, 147], [180, 137], [216, 137], [236, 134], [268, 136], [295, 135], [326, 142], [345, 151], [315, 160], [291, 159], [267, 162], [239, 159], [220, 163], [197, 158], [174, 159]], "moss.1");
+poly([[163, 146], [185, 138], [215, 138], [229, 136], [235, 139], [216, 145], [199, 147], [181, 152]], "moss.3");
 chain([[174, 152], [185, 156], [195, 155], [209, 160], [218, 158], [230, 160]], "moss.2", 2);
 chain([[279, 160], [296, 156], [311, 158], [333, 154]], "moss.2", 2);
 for (const [x, y] of [[181, 158], [190, 161], [215, 163], [290, 163], [326, 159]]) {
@@ -196,13 +196,15 @@ for (const [x, y, w] of [[178, 152, 6], [192, 155, 8], [224, 155, 9], [240, 158,
   for (let k = 1; k < w; k += 3) line(x + k, y, x + k - 1, y - 3, "moss.2");
 }
 chain([[228, 174], [231, 184], [226, 194], [231, 196]], "wood.0");
-chain([[322, 170], [319, 180], [324, 187], [320, 195]], "wood.0");
-chain([[323, 171], [323, 180], [326, 185]], "wood.1");
+// Exposed roots grip the garden soil instead of dangling below the floating island.
+chain([[332, 153], [337, 156], [339, 160], [335, 164], [329, 165]], "wood.0", 2);
+chain([[337, 157], [343, 159], [346, 162]], "wood.1");
 
 // The garden path catches reflected window light in broken stone slabs.
-poly([[173, 149], [211, 137], [231, 137], [230, 145], [208, 148], [185, 155]], "stone.1");
-for (const [x, y, w] of [[178, 149, 8], [188, 146, 10], [199, 143, 9], [210, 140, 9], [222, 139, 8]]) {
-  line(x, y, x + w, y - 1, "stone.3", 2); line(x + 2, y, x + w, y - 1, "stone.4");
+poly([[173, 149], [211, 137], [230, 138], [237, 145], [215, 150], [185, 155]], "stone.1");
+for (const [x, y, w] of [[177, 149, 7], [186, 146, 8], [196, 143, 7], [205, 141, 9], [216, 141, 7], [225, 143, 6]]) {
+  poly([[x, y], [x + w, y - 1], [x + w + 1, y + 1], [x + 1, y + 2]], "stone.3");
+  line(x + 1, y, x + w - 1, y, "stone.4");
 }
 
 // 4. Observatory tower behind the library. Cool cylinder, copper instruments.
@@ -247,6 +249,17 @@ line(261, 126, 309, 118, "wood.0", 2);
 line(262, 107, 262, 139, "wood.0", 2); line(286, 104, 286, 135, "wood.0", 2);
 line(307, 104, 307, 133, "wood.0", 2);
 line(193, 132, 203, 143, "wood.1", 2); line(247, 132, 238, 142, "wood.1", 2);
+// A stone footing makes the walls sit on the garden terrace.
+line(188, 147, 213, 146, "stone.0", 3); line(235, 146, 261, 143, "stone.0", 3);
+line(189, 146, 212, 145, "stone.4", 1); line(236, 145, 260, 142, "stone.4", 1);
+line(263, 143, 309, 135, "stone.0", 3); line(265, 142, 308, 134, "stone.3", 1);
+// A narrow cast shadow and a few foundation blocks anchor both wall planes.
+chain([[190, 150], [211, 149], [218, 152], [232, 151], [243, 149], [259, 147]], "moss.0", 2);
+chain([[264, 147], [283, 144], [299, 141], [309, 139]], "moss.0", 2);
+for (const [x, y, w] of [[192, 148, 7], [203, 148, 8], [239, 147, 7], [250, 145, 7], [270, 145, 7], [289, 142, 8], [301, 139, 6]]) {
+  line(x, y, x + w, y - 1, "stone.2", 1);
+  dot(x + 2, y - 1, "stone.4");
+}
 
 // Warm windows have actual frames, shutters, sills, and individual book shapes.
 function window(x, y, w, h) {
@@ -374,8 +387,11 @@ for (const [x, y, h] of [[181, 115, 9], [184, 112, 6], [189, 109, 8], [194, 106,
 // 7. Arched bridge. Openings reveal the exact background, preserving depth.
 const behindBridge = pixels.slice();
 const bridgeY = x => 180 - (x - 38) * 0.245;
-for (let x = 35; x < 185; x++) {
-  const y = Math.round(bridgeY(x)); rect(x, y - 5, 1, 22, "stone.1");
+for (let x = 35; x < 191; x++) {
+  const y = Math.round(bridgeY(x));
+  const endTaper = Math.max(0, x - 181);
+  const lowerEdge = y + 17 - endTaper * 2;
+  rect(x, y - 5, 1, lowerEdge - (y - 5) + 1, "stone.1");
   rect(x, y - 5, 1, 3, "stone.3"); rect(x, y - 2, 1, 2, "stone.4");
 }
 for (const [left, right] of [[51, 78], [89, 117], [128, 158]]) {
@@ -396,6 +412,13 @@ for (const x of [45, 83, 123, 166]) {
 }
 line(45, bridgeY(45) - 9, 181, bridgeY(181) - 9, "stone.0");
 line(45, bridgeY(45) - 10, 181, bridgeY(181) - 10, "stone.3");
+// Broaden the bridge's final deck into a short landing that meets the garden path.
+poly([[174, 140], [188, 137], [197, 139], [194, 146], [184, 150], [176, 147]], "stone.1");
+chain([[176, 141], [187, 139], [195, 140]], "stone.2");
+for (const [x, y, w] of [[177, 143, 5], [184, 141, 6], [190, 141, 4], [182, 146, 6], [189, 144, 4]]) {
+  line(x, y, x + w, y - 1, "stone.2");
+  dot(x + w - 1, y + 1, "stone.2");
+}
 // Far posts and handrail remain behind the traveler rather than across the body.
 
 // Foreground approach is darker and more detailed than the distant island.
@@ -414,7 +437,7 @@ line(tx - 2, ty - 10, tx - 2, ty - 4, "accent.1");
 rect(tx - 2, ty - 15, 5, 4, "wood.0"); rect(tx + 1, ty - 14, 2, 3, "copper.4");
 rect(tx - 3, ty - 16, 6, 2, "roof.1"); dot(tx - 2, ty - 17, "roof.3");
 chain([[tx - 2, ty - 11], [tx - 8, ty - 12], [tx - 10, ty - 10]], "accent.1");
-line(tx + 2, ty - 10, tx + 6, ty - 7, "wood.0", 2); dot(tx + 6, ty - 7, "gold.2");
+line(tx + 2, ty - 9, tx + 4, ty - 8, "wood.1", 2); line(tx + 4, ty - 8, tx + 6, ty - 7, "wood.1"); dot(tx + 6, ty - 7, "gold.2");
 line(tx + 7, ty - 7, tx + 7, ty - 4, "wood.0");
 rect(tx + 5, ty - 4, 5, 5, "gold.0"); rect(tx + 6, ty - 3, 3, 3, "gold.3"); dot(tx + 7, ty - 2, "gold.4");
 rect(tx + 5, ty - 5, 5, 1, "wood.0"); rect(tx + 5, ty + 1, 5, 1, "wood.0");
@@ -443,26 +466,35 @@ for (const [x, y] of [[258, 151], [267, 148], [304, 150], [318, 148], [231, 155]
 const still = pixels.slice();
 function waterFall(x, y, w, length, phase) {
   for (let yy = 0; yy < length; yy++) {
-    const taper = yy > length - 7 ? Math.floor((yy - length + 7) / 3) : 0;
-    const drift = Math.floor(yy / 17);
+    const fade = Math.max(0, yy - (length - 18));
+    const taper = fade > 2 ? Math.floor((fade + 2) / 3) : 0;
+    const drift = Math.floor(yy / 17) + (fade > 5 && ((yy + phase * 3) % 7 < 3) ? 1 : 0);
     for (let xx = taper; xx < w - taper; xx++) {
+      if (fade && ((xx * 5 + yy * 7 + phase * 3) % 18) < fade + (xx % 2)) continue;
       let c = "water.1";
       if (xx === 1 || xx === w - 2) c = "water.2";
       if (xx === 2 && (yy - phase * 2 + 80) % 16 < 10) c = "water.3";
       if (xx === w - 3 && (yy - phase * 2 + 91) % 16 < 6) c = "water.4";
+      if (fade > 2 && (xx + yy + phase) % 3 === 0) c = "cloud.2";
+      if (fade > 7 && (xx * 3 + yy + phase) % 4 < 2) c = "cloud.3";
       dot(x + xx + drift, y + yy, c);
     }
   }
   ellipse(x + w / 2, y - 1, w / 2 + 3, 2, "water.2");
-  line(x, y - 2, x + w - 1, y - 2, "water.4");
-  for (let i = 0; i < 3; i++) {
-    const yy = y + length - 3 + ((phase * 2 + i * 5) % 16);
-    dot(x + w / 2 + i * 2 - 1, yy, "water.3");
+  for (let xx = 0; xx < w; xx++) {
+    if ((xx + phase) % 4 !== 1) dot(x + xx, y - 2, xx % 3 === 0 ? "water.4" : "water.3");
+  }
+  for (let i = 0; i < 18; i++) {
+    const dx = i - 9, spread = Math.floor(Math.abs(dx) / 2);
+    const yy = y + length - 4 + spread + ((phase * 2 + i * 3) % 6);
+    if ((phase + i) % 4 === 0) dot(x + Math.floor(w / 2) + dx, yy, "cloud.2");
+    else if ((phase + i) % 5 === 0) dot(x + Math.floor(w / 2) + dx, yy, "cloud.3");
+    else if ((phase + i) % 7 === 0) dot(x + Math.floor(w / 2) + dx, yy, "water.1");
   }
 }
 function frame(phase) {
   pixels = still.slice();
-  waterFall(199, 159, 8, 42, phase); waterFall(309, 161, 5, 34, phase);
+  waterFall(199, 159, 8, 42, phase); waterFall(309, 161, 5, 42, phase);
   for (const [x, y, offset] of [[151, 126, 0], [161, 139, 2], [323, 140, 3], [347, 150, 5]]) {
     const dx = Math.round(Math.sin((phase + offset) * Math.PI / 4) * 2), dy = Math.round(Math.cos((phase + offset) * Math.PI / 4));
     dot(x + dx, y + dy, "gold.2");

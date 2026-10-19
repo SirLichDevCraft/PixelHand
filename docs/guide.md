@@ -118,12 +118,15 @@ Use separate authored upper and lower limbs, pose variants, and local correction
 
 Copy a configuration example from `configs/`. Ollama uses its native chat API. LM Studio and hosted services can use a chat-completions-compatible endpoint. Set the actual model name, endpoint, and vision capability. Set `vision` to true only for a model accepting image inputs. `local_only` requires a loopback endpoint and never falls back to a hosted service.
 
+`quality_effort` controls mandatory vision critique/refinement cycles: `low` requires 3 passes, `medium` 5, and `high` 8. Each pass means the model receives a review image, makes a successful art edit, then receives a fresh review image to judge that edit. The runner prompts the model to identify concrete defects and will not accept an early final answer before the selected count. This spends additional model calls and time for stronger visual review. Text-only runs do not enforce passes; set `vision: true` for this control to take effect. Progress events and the run transcript report the selected effort and completed/required counts.
+
 API credentials are read from the environment variable named by `api_key_env`; configuration files must not contain raw keys. Headers and provider error bodies are omitted from transcripts and diagnostics. Token usage comes from provider responses; missing usage is labelled incomplete. Dollar cost is null unless explicit `billing.input_per_million` and `billing.output_per_million` rates are configured. Rates are user-supplied, not fetched price estimates.
 
 ```sh
 node tools/run-agent.js --config configs/local.json --doctor true
 node tools/run-agent.js --config configs/local.json --root /path/to/new-art-project --brief brief.txt --out /path/to/run.json
 node tools/run-agent.js --config configs/local.json --root /path/to/new-art-project --brief brief.txt --out /path/to/run.json --resume /path/to/run.json
+node tools/run-agent.js --config configs/api.example.json --quality-effort high --root /path/to/new-art-project --brief brief.txt
 ```
 
 The runner bounds rounds, calls, reported tokens, context bytes, request timeout, and elapsed time. SIGINT cancels requests. It processes tool calls sequentially, checkpoints pending calls and results, and uses persistent request receipts for retry idempotency. Budget checks stop subsequent requests; token budgets cannot undo usage already consumed by the last provider response. A text-only model leaves visual acceptance pending. `model_finished` means the model ended its turn, not that its art met the brief.

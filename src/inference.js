@@ -30,6 +30,11 @@ function validateConfig(config) {
   for (const flag of ["vision", "local_only", "tools"])
     if (config[flag] !== undefined && typeof config[flag] !== "boolean")
       throw new Error(`${flag} must be boolean`);
+  if (
+    config.quality_effort !== undefined &&
+    !["low", "medium", "high"].includes(config.quality_effort)
+  )
+    throw new Error("quality_effort must be low, medium or high");
   if (config.tools === false)
     throw new Error(
       "The agent runner requires a model that supports tool calls",
@@ -62,6 +67,7 @@ function validateConfig(config) {
     base_url: url.toString().replace(/\/$/, ""),
     timeout_ms: config.timeout_ms ?? 60000,
     max_output_tokens: config.max_output_tokens ?? 2048,
+    quality_effort: config.quality_effort ?? "medium",
   };
 }
 function createProvider(input) {
