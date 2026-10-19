@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible engine, integration, or rendering problem.
+title: "[Bug]: "
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Explain the failure. For art or motion defects, include a native-scale image or GIF and the affected frame or facing.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include a small project, command, tool arguments, or a sequence of steps. Remove API keys and private content.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: PixelHand version, OS, Node version, and interface or MCP client
+    validations:
+      required: true

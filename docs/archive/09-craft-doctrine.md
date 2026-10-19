@@ -1,5 +1,8 @@
 # 09 — Craft doctrine: the layer the architecture plan forgot
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 ## 1. The experiment that exposed the gap
 
 I drew a 32×32 pistol twice with the tooling that already exists (`probe/png.js`), no engine required.

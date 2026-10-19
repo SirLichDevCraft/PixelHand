@@ -1,5 +1,8 @@
 # 11 — Collaboration: the style is built from your choices, not my guess
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 The requirement: the model driving the engine must develop the visual style **with you**, not deliver one at you.
 
 The design principle that follows is the one most art pipelines get wrong:

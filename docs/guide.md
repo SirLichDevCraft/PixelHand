@@ -22,7 +22,7 @@ npm install -g ./pixelhand-0.2.0-rc.1.tgz
 pixelhand help project_init
 ```
 
-Package version and MCP server version come from package.json. Public source visibility and an installable archive do not change the repository's UNLICENSED status.
+Package version and MCP server version come from package.json. The engine, documentation, and original example artwork are available under the [MIT license](../LICENSE), including commercial use.
 
 ## MCP and model-sized toolsets
 

@@ -14,3 +14,5 @@ Run `node bench/showcase-hero.js` from the repository root to rebuild the projec
 - `preview/showcase.json` - frame timing, audit, and gate reports
 
 The 8 x 4 walk passes `loop_validate` in every facing: at most 1 px foot spread, no limb collisions, and a 0.4 s cycle at 10 fps. The motion report finds meaningful changes in both arms and legs, with alternating pose-specific leg shapes. The stricter export gate still refuses the draft for lighting consistency, flat material patches, and stray-pixel findings. Those are retained in `preview/showcase.json`; this is a rendered, reviewable character draft, not a claim that every art-quality gate passes.
+
+The editable source and previews are available under the repository's [MIT license](../../LICENSE), including commercial use.

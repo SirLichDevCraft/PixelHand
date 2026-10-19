@@ -1,13 +1,39 @@
 {
   "name": "pixelhand",
   "version": "0.2.0-rc.1",
-  "description": "An engine for hand-placed 2D pixel art, directed by an LLM. Palette-indexed cels, ramp discipline, deterministic audit, vision loop.",
+  "description": "Pixel-art tooling for AI agents: editable sprites, palette discipline, animation, and visual review through MCP, CLI, or JavaScript.",
   "type": "commonjs",
-  "private": true,
   "main": "src/index.js",
-  "files": ["src/", "tools/run-agent.js", "tools/evaluate.js", "examples/", "configs/*.example.json", "evaluation/briefs.json", "docs/", "README.md", "PRODUCTION.md", "CHANGELOG.md"],
-  "repository": { "type": "git", "url": "git+https://github.com/SirLichDevCraft/PixelHand.git" },
-  "engines": { "node": ">=20.3.0" },
+  "files": [
+    "src/",
+    "tools/run-agent.js",
+    "tools/evaluate.js",
+    "examples/",
+    "configs/*.example.json",
+    "evaluation/briefs.json",
+    "docs/README.md",
+    "docs/guide.md",
+    "docs/architecture.md",
+    "docs/provenance.md",
+    "README.md",
+    "LICENSE",
+    "PLAN.md",
+    "PRODUCTION.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SirLichDevCraft/PixelHand.git"
+  },
+  "homepage": "https://github.com/SirLichDevCraft/PixelHand#readme",
+  "bugs": {
+    "url": "https://github.com/SirLichDevCraft/PixelHand/issues"
+  },
+  "engines": {
+    "node": ">=20.3.0"
+  },
   "dependencies": {},
   "bin": {
     "pixelhand": "src/cli.js",
@@ -46,5 +72,5 @@
     "mcp",
     "game-art"
   ],
-  "license": "UNLICENSED"
+  "license": "MIT"
 }

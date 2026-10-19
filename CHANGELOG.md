@@ -2,6 +2,8 @@
 
 ## 0.2.0-rc.1
 
+- MIT licensing for code, documentation, and original artwork, including commercial reuse.
+- Showcase-led documentation, contribution and security guides, and an archived development history.
 - Individual tool schemas shared by MCP, CLI help, and the public JavaScript API; compact tool profiles and expert discovery.
 - Version-negotiated MCP, useful text-only results, and PNG frame-strip feedback alongside GIF playback.
 - Durable recovery for warm art, undo, checkpoints, poses and workflows, with writer conflicts and external-grid reconciliation.

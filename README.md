@@ -1,79 +1,103 @@
 # PixelHand
 
-[![Tests](https://github.com/SirLichDevCraft/PixelHand/actions/workflows/test.yml/badge.svg)](https://github.com/SirLichDevCraft/PixelHand/actions/workflows/test.yml)
+**Pixel art, placed with intent. Built for AI agents.**
 
-**A hand-placed 2D pixel-art engine directed through tools and MCP.** PixelHand keeps sprites as palette-indexed pixels and editable text grids, then helps an artist or agent render, inspect, audit and refine them at native game scale.
+[![Tests](https://github.com/SirLichDevCraft/PixelHand/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/SirLichDevCraft/PixelHand/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-87b88b)](LICENSE)
+[![Node.js: 20.3+](https://img.shields.io/badge/Node.js-20.3%2B-43853d)](package.json)
 
-The strongest results come from a clear design brief, authored pixels, visual review and iteration. The current release candidate adds durable workflows and local/API model execution; [production release gates](PRODUCTION.md) track qualification.
+An open-source engine for creating sprites, animation, and game art through **MCP, CLI, or JavaScript**. Local and API-driven models work with palette-indexed pixels, editable text grids, and visual feedback. Every change can be inspected, revised, and saved as source.
 
-## Showcases
+[Get started](#get-started) · [Connect an agent](#connect-an-agent) · [Documentation](docs/README.md) · [Contribute](CONTRIBUTING.md)
 
-### Rowan — eight-direction walk
+## Made with PixelHand
 
-An original 32 × 40 character with eight authored facings, a four-pose walk cycle, rigged limb layering and frame-by-frame review.
+### Rowan · eight-direction walk
 
-![Rowan walking across eight authored facings](showcase/hero/preview/walk-all-directions.gif)
+An original 32 × 40 character with eight authored facings, four walk poses, layered limbs, and frame-by-frame review.
 
-[Open the eight-facing contact sheet](showcase/hero/preview/walk-contact.png) · [See per-facing GIFs and audit details](showcase/hero/README.md)
+![Rowan walking in eight directions, rendered by PixelHand](showcase/hero/preview/walk-all-directions.gif)
 
-### Farmhouse
+[Contact sheet](showcase/hero/preview/walk-contact.png) · [Individual GIFs and audit results](showcase/hero/README.md) · [Authoring script](bench/showcase-hero.js)
 
-A hand-authored building study rendered through PixelHand's palette and inspection workflow.
+### Farmhouse · architectural study
 
-![Farmhouse study rendered by PixelHand](showcase/farmhouse/preview.png)
+A building study with material ramps, warm lighting, and editable pixel source.
 
-## What the engine provides
+![Original farmhouse study rendered by PixelHand](showcase/farmhouse/preview.png)
 
-- Palette-indexed cels and text-grid source that can be reviewed and changed precisely.
-- Style bibles, material ramps, and palette-aware drawing operations.
-- Renders for silhouette, value, game-scale, contact sheets, animation playback and diffs.
-- Deterministic audits for palette use, clusters, silhouette, grounding and other craft rules.
-- Authored rigs, named joints, occlusion order, key poses and multi-direction clips.
-- PNG/GIF previews, export gates, and persistence in ordinary project files.
-- A CLI and a stdio MCP server, so game tools and coding agents can direct the same engine.
+[Editable project](showcase/farmhouse/art) · [Authoring script](bench/showcase-farmhouse.js)
 
-## Try it
+These examples were authored and iterated with the engine. They demonstrate the drawing workflow; they are not autonomous model benchmark results.
 
-Requires Node.js 20 or newer. PixelHand has no runtime package dependencies.
+## What you can build
 
-```sh
-npm test
-node src/cli.js list
-node bench/showcase-hero.js
-```
+| Capability | Tools and feedback |
+| --- | --- |
+| Sprites and props | Named pixel maps, shapes, fills, outlines, masks, protected regions, and atomic edit batches |
+| Consistent art direction | Style bibles, material ramps, palette rules, and saved visual preferences |
+| Directional animation | Authored rigs, joint chains, planted contacts, eight-facing projection, and clip validation |
+| Tiles and environments | Tile rules, reusable parts, materials, and scene composition |
+| Visual review | Native-scale renders, silhouettes, value maps, differences, contact sheets, and GIF playback |
+| Agent workflows | Typed tool contracts, compact discovery, saved briefs, recovery, and bounded local/API execution |
 
-The showcase command writes its previews under `showcase/hero/preview/`.
+The core has **zero runtime dependencies**. Projects store their art in ordinary files you can version, diff, and carry into another tool.
 
-For installation, compact model toolsets, recovery, skeleton authoring, local/API inference, and live quality evaluation, see the [production workflow guide](docs/12-production.md).
+## Get started
 
-## MCP
-
-Run the stdio server from the repository:
+Requires **Node.js 20.3 or newer** and Git.
 
 ```sh
-node src/mcp.js
+git clone https://github.com/SirLichDevCraft/PixelHand.git
+cd PixelHand
+node examples/lantern.js
 ```
 
-For Zed, add a local context server in `settings.json` and use the local path to this checkout:
+This creates an original lantern project in `out/lantern-example/`, including saved pixel source, a PNG export, and review images. Open `out/lantern-example/out/lantern.png` to see the result. Supply a new destination for another run:
+
+```sh
+node examples/lantern.js /path/to/new-art-project
+node src/cli.js help draw_named_map
+```
+
+No package installation or API key is needed for the authored example. To install CLI commands from this checkout, see the [installation guide](docs/guide.md#installation).
+
+## Connect an agent
+
+PixelHand exposes a stdio MCP server. In Zed, add this to `settings.json`, replacing the path with your checkout. Windows paths can use forward slashes, for example `C:/repos/PixelHand/src/mcp.js`.
 
 ```json
 {
   "context_servers": {
     "pixelhand": {
       "command": "node",
-      "args": ["/path/to/PixelHand/src/mcp.js"],
-      "env": {}
+      "args": ["/absolute/path/to/PixelHand/src/mcp.js"],
+      "env": { "PIXELHAND_TOOLSET": "core" }
     }
   }
 }
 ```
 
-Use `project_open` with the root of an existing PixelHand game project before editing it. Use `project_init` only to create a new art project. Render and inspect the result after edits; animation should be reviewed across every frame and facing before export.
+The compact `core` profile provides discovery and everyday editing. An agent can find specialist tools with `tool_search`, inspect their contracts with `tool_help`, and execute them through `tool_call`.
 
-## Project status
+Start a new art project with `project_init`; resume one with `project_open`. Build from silhouette to detail, inspect the renders, and review every animation frame and facing before export.
 
-PixelHand 0.2 is a release candidate. [`PRODUCTION.md`](PRODUCTION.md) tracks engineering and live model qualification separately. [`PLAN.md`](PLAN.md) retains the original development evidence and coverage work. Showcases demonstrate the authored workflow; model quality is evaluated on independent briefs with explicit visual review.
+For standalone model execution, configuration examples support [Ollama](configs/ollama.example.json), [LM Studio](configs/lmstudio.example.json), and [compatible API endpoints](configs/api.example.json). See [local and API inference](docs/guide.md#local-and-api-inference) for setup, budgets, and recovery.
 
-## License
+## Development status
 
-No open-source license is currently provided. Public visibility does not grant permission to reuse or redistribute the code or artwork.
+**0.2.0-rc.1 · release candidate.** Automated checks cover the engine, persistence, public interfaces, and provider adapters. Live local/API art-quality qualification remains open. Mechanical checks and recorded visual review are reported separately.
+
+[Release gates](PRODUCTION.md) · [Roadmap](PLAN.md) · [Changelog](CHANGELOG.md) · [Architecture](docs/architecture.md)
+
+```sh
+npm test
+npm run check
+npm pack --dry-run
+```
+
+## Free to use
+
+The code, documentation, and original artwork in this repository are released under the [MIT license](LICENSE). Use, modify, share, and sell them in personal or commercial projects, with no royalties, subscription, or expiry. Keep the license and copyright notice with copies or substantial portions you distribute.
+
+PixelHand imposes no license or attribution requirement on new art you create with it. Reusing the included artwork follows its MIT terms. See [asset provenance](docs/provenance.md) for how imported assets are tracked.

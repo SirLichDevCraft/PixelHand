@@ -1,10 +1,13 @@
 # 02 — The style system: one engine, every style, controlled per game
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 This is the part that answers "an engine that covers all styles of art, which the LLM controls on a per-game basis."
 
 **A style is not a filter applied to finished art. It is a constraint set the engine enforces plus a derivation recipe the agent uses while drawing.** That distinction is the whole idea: a filter can make two sprites *look similar*; a constraint set makes them *be* a style, and makes deviation a build failure.
 
-A bible is one **coordinate** in the nine-axis space specified in `docs/08-coverage-matrix.md`. The examples below are coordinates, not a library.
+A bible is one **coordinate** in the nine-axis space specified in `docs/archive/08-coverage-matrix.md`. The examples below are coordinates, not a library.
 
 ---
 
@@ -106,7 +109,7 @@ A bible is one **coordinate** in the nine-axis space specified in `docs/08-cover
 
 Four example coordinates ship initially, chosen because they are far apart. New ones are authored per project and then **frozen**. There is no closed set: any point in the nine-axis space is expressible, and `docs/08` lists the points that must work for the engine to be called complete.
 
-**These are original constraint sets assembled from general technique.** Each is named for what it *does*, never for what it resembles, and every palette in them is derived from declared base hues rather than sampled from any existing game. See `docs/07-provenance.md`.
+**These are original constraint sets assembled from general technique.** Each is named for what it *does*, never for what it resembles, and every palette in them is derived from declared base hues rather than sampled from any existing game. See `docs/archive/07-provenance.md`.
 
 ---
 
@@ -148,7 +151,7 @@ The last three are the ones that separate a good still sprite from a good *anima
 
 ## 4. The coordinate declaration ritual (per project)
 
-This is how "the LLM controls style per project" actually plays out. It is a fixed procedure, and it is short. But note the ownership: **the coordinate is populated by your decisions, not by my guess.** `docs/11-collaboration.md` is the mechanism; this section is where it plugs into the pipeline.
+This is how "the LLM controls style per project" actually plays out. It is a fixed procedure, and it is short. But note the ownership: **the coordinate is populated by your decisions, not by my guess.** `docs/archive/11-collaboration.md` is the mechanism; this section is where it plugs into the pipeline.
 
 **Step 1 — Converge on a coordinate.** Nine axes from `docs/08`: projection, art scale, palette magnitude, temperature model, edge policy, shading model, detail density, motion model, mood. A project may supply some of them. For the rest, `style_options` presents **three concrete variants along one axis** and you pick or reject — because people cannot describe a style, but they can recognise one. Each pick or rejection is recorded as a delta. 3–6 rounds, one axis per round, then the coordinate is yours. Answers become `art/project.json` and `art/taste.json`.
 
