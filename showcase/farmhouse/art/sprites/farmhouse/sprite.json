@@ -1,0 +1,57 @@
+{
+  "id": "farmhouse",
+  "style": "farmstead-cozy",
+  "palette": "farmhouse",
+  "canvas": {
+    "w": 64,
+    "h": 64
+  },
+  "anchor": {
+    "x": 32,
+    "y": 54
+  },
+  "layers": [
+    {
+      "id": "body",
+      "z": 0
+    }
+  ],
+  "rig": null,
+  "directions": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "clips": [],
+  "cels": {
+    "base": "cels/base.grid"
+  },
+  "tier": "support",
+  "asset_class": "structure",
+  "design": {
+    "primary_read": "a welcoming farm cottage with a broad terracotta roof and a centered timber door",
+    "exaggerated": "the roof is broad and sheltering, while the entry is small and warm",
+    "focal_accent": "one brass door latch",
+    "shape_family": "rural_cottage",
+    "provenance_note": "original hand-authored PixelHand showcase asset; no game sprite or reference image imported"
+  },
+  "provenance": {
+    "authored_by": "agent",
+    "directed_by": "user",
+    "engine": "pixelhand 0.1",
+    "style_bible": "farmstead-cozy",
+    "palette_file": "art/palettes/farmhouse.json",
+    "palette_origin": "derived in-repo from declared base hues",
+    "authored_pixels": 3653,
+    "imported_pixels": 0,
+    "authored_share": 1,
+    "generative_model_used": null,
+    "sources": [],
+    "edit_ops": 39
+  }
+}

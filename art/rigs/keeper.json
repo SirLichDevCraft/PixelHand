@@ -1,0 +1,230 @@
+{
+  "canvas": [
+    26,
+    34
+  ],
+  "baseline": 31,
+  "anchors": {
+    "down": {
+      "origin": [
+        1,
+        4
+      ],
+      "shoulderNear": [
+        14,
+        15
+      ],
+      "shoulderFar": [
+        6,
+        14
+      ],
+      "handNear": [
+        15,
+        19
+      ],
+      "legNear": [
+        9,
+        28
+      ],
+      "legFar": [
+        3,
+        28
+      ]
+    },
+    "right": {
+      "origin": [
+        3,
+        4
+      ],
+      "shoulderNear": [
+        10,
+        15
+      ],
+      "shoulderFar": [
+        5,
+        14
+      ],
+      "handNear": [
+        11,
+        19
+      ],
+      "legNear": [
+        10,
+        28
+      ],
+      "legFar": [
+        4,
+        28
+      ]
+    },
+    "up": {
+      "origin": [
+        1,
+        4
+      ],
+      "shoulderNear": [
+        14,
+        15
+      ],
+      "shoulderFar": [
+        6,
+        14
+      ],
+      "handNear": [
+        15,
+        19
+      ],
+      "legNear": [
+        9,
+        28
+      ],
+      "legFar": [
+        3,
+        28
+      ]
+    },
+    "down-right": {
+      "origin": [
+        2,
+        4
+      ],
+      "shoulderNear": [
+        13,
+        15
+      ],
+      "shoulderFar": [
+        5,
+        14
+      ],
+      "handNear": [
+        14,
+        19
+      ],
+      "legNear": [
+        8,
+        28
+      ],
+      "legFar": [
+        2,
+        28
+      ]
+    },
+    "up-right": {
+      "origin": [
+        3,
+        4
+      ],
+      "shoulderNear": [
+        13,
+        15
+      ],
+      "shoulderFar": [
+        5,
+        14
+      ],
+      "handNear": [
+        14,
+        19
+      ],
+      "legNear": [
+        9,
+        28
+      ],
+      "legFar": [
+        3,
+        28
+      ]
+    }
+  },
+  "zOrder": {
+    "default": [
+      "legFar",
+      "legNear",
+      "body",
+      "armFar",
+      "armNear",
+      "lantern"
+    ],
+    "down": [
+      "legFar",
+      "legNear",
+      "body",
+      "armNear",
+      "lantern"
+    ],
+    "up": [
+      "legFar",
+      "legNear",
+      "body",
+      "armNear",
+      "lantern"
+    ],
+    "right": [
+      "legFar",
+      "legNear",
+      "body",
+      "armFar",
+      "armNear",
+      "lantern"
+    ],
+    "down-right": [
+      "legFar",
+      "legNear",
+      "body",
+      "armNear",
+      "lantern"
+    ],
+    "up-right": [
+      "legFar",
+      "legNear",
+      "body",
+      "armNear",
+      "lantern"
+    ]
+  },
+  "partJoints": {
+    "body": {
+      "joint": "origin",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "legNear": {
+      "joint": "legNear",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "legFar": {
+      "joint": "legFar",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "armNear": {
+      "joint": "shoulderNear",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "armFar": {
+      "joint": "shoulderFar",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "lantern": {
+      "joint": "handNear",
+      "offset": [
+        0,
+        0
+      ]
+    }
+  },
+  "id": "keeper"
+}

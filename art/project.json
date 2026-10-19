@@ -1,0 +1,34 @@
+{
+  "id": "lantern-keeper",
+  "created": "2026-10-16T06:37:23.589Z",
+  "engine": "pixelhand 0.1",
+  "style": "keeper",
+  "canvas": {
+    "w": 26,
+    "h": 34
+  },
+  "directions": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "fps": 8,
+  "coordinate": {
+    "projection": "three-quarter",
+    "art_scale": 32,
+    "palette_size": 24,
+    "temperature": "warm-cool-hue-shift",
+    "edge_policy": "selective-dark",
+    "shading": "ramp-lit",
+    "detail": "moderate",
+    "motion": "4-frame",
+    "mood": "melancholy",
+    "id": "keeper"
+  },
+  "coordinate_warnings": []
+}

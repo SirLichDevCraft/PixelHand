@@ -1,0 +1,227 @@
+{
+  "id": "idle",
+  "template": "idle",
+  "directions": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "fps": 6,
+  "notes": "",
+  "sprite": "keeper",
+  "frames_by_direction": {
+    "down": [
+      {
+        "cel": "idle/down/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/down/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/down/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/down/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "down-right": [
+      {
+        "cel": "idle/down-right/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/down-right/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/down-right/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/down-right/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "right": [
+      {
+        "cel": "idle/right/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/right/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/right/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/right/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "up-right": [
+      {
+        "cel": "idle/up-right/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/up-right/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/up-right/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/up-right/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "up": [
+      {
+        "cel": "idle/up/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/up/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/up/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/up/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "up-left": [
+      {
+        "cel": "idle/up-left/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/up-left/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/up-left/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/up-left/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "left": [
+      {
+        "cel": "idle/left/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/left/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/left/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/left/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ],
+    "down-left": [
+      {
+        "cel": "idle/down-left/f0",
+        "pose": "idle-1",
+        "duration": 37,
+        "events": []
+      },
+      {
+        "cel": "idle/down-left/f1",
+        "pose": "idle-2",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/down-left/f2",
+        "pose": "idle-3",
+        "duration": 50,
+        "events": []
+      },
+      {
+        "cel": "idle/down-left/f3",
+        "pose": "idle-4",
+        "duration": 30,
+        "events": []
+      }
+    ]
+  }
+}

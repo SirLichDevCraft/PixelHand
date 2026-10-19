@@ -1,0 +1,71 @@
+{
+  "id": "farmhouse",
+  "origin": "derived in-repo from declared base hues",
+  "base_hues": null,
+  "ramps": {
+    "roof": {
+      "role": "material",
+      "colors": [
+        "#64313a",
+        "#914044",
+        "#bd574c",
+        "#e47a59"
+      ]
+    },
+    "wall": {
+      "role": "material",
+      "colors": [
+        "#8a634e",
+        "#bd9167",
+        "#e0bb83",
+        "#f2d9a0"
+      ]
+    },
+    "wood": {
+      "role": "material",
+      "colors": [
+        "#44313a",
+        "#765044",
+        "#a87952"
+      ]
+    },
+    "glass": {
+      "role": "material",
+      "colors": [
+        "#304a5b",
+        "#4c7788",
+        "#88b4b2"
+      ]
+    },
+    "stone": {
+      "role": "material",
+      "colors": [
+        "#4a4650",
+        "#77717a",
+        "#aaa18e"
+      ]
+    },
+    "leaf": {
+      "role": "material",
+      "colors": [
+        "#344a3b",
+        "#54704b",
+        "#849259"
+      ]
+    }
+  },
+  "single": {
+    "ink": {
+      "rgb": "#302631",
+      "role": "outline"
+    },
+    "brass": {
+      "rgb": "#f1c45f",
+      "role": "accent"
+    },
+    "ground": {
+      "rgb": "#201a25",
+      "role": "shadow"
+    }
+  }
+}

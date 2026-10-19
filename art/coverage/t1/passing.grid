@@ -1,0 +1,14 @@
+# cel v1
+# name t1.passing
+# size 8x8
+# palette t1-mono
+# offset 0,0
+# meta {"direction":"right","pose":"passing"}
+...""...
+.."""!..
+.."""!..
+."""!!!.
+."""!!!.
+.""!!!!.
+.."!.!!.
+.."!!...

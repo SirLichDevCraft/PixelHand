@@ -1,0 +1,78 @@
+{
+  "id": "keeper",
+  "origin": "derived in-repo from declared base hues",
+  "base_hues": null,
+  "ramps": {
+    "coat": {
+      "role": "material",
+      "colors": [
+        "#23213a",
+        "#333350",
+        "#474d6a",
+        "#6b7b99",
+        "#94a8c0"
+      ]
+    },
+    "skin": {
+      "role": "material",
+      "colors": [
+        "#7d5636",
+        "#a6764b",
+        "#d8ae82"
+      ]
+    },
+    "hair": {
+      "role": "material",
+      "colors": [
+        "#1d1712",
+        "#3a2e24"
+      ]
+    },
+    "boot": {
+      "role": "material",
+      "colors": [
+        "#332d24",
+        "#4e4436",
+        "#6f6049"
+      ]
+    },
+    "brass": {
+      "role": "material",
+      "relight": false,
+      "colors": [
+        "#1a1309",
+        "#84601a",
+        "#dcb04a"
+      ]
+    },
+    "glow": {
+      "role": "light",
+      "colors": [
+        "#f2c14e",
+        "#fff0b8"
+      ]
+    },
+    "scarf": {
+      "role": "material",
+      "colors": [
+        "#6e6b60",
+        "#9c9a90",
+        "#b9b5a6"
+      ]
+    }
+  },
+  "single": {
+    "inner": {
+      "rgb": "#08070d",
+      "role": "detail"
+    },
+    "outline": {
+      "rgb": "#14161f",
+      "role": "outline"
+    },
+    "contact": {
+      "rgb": "#24222e",
+      "role": "shadow"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "woodland-hero",
+  "projection": "side",
+  "art_scale": 32,
+  "palette_size": 24,
+  "temperature": "warm-cool-hue-shift",
+  "edge_policy": "full-1px",
+  "shading": "ramp-lit",
+  "detail": "moderate",
+  "motion": "4-frame",
+  "mood": "cozy-warm",
+  "light_vector": [
+    -0.7,
+    -0.7
+  ],
+  "signature": "deep forest cloak, ember scarf, brass compass clasp, and a leaf-shaped sword",
+  "frozen": false,
+  "derived_from": "declared base hues",
+  "created": "2026-10-19T14:37:04.766Z"
+}

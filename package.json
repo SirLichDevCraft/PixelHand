@@ -1,0 +1,39 @@
+{
+  "name": "pixelhand",
+  "version": "0.1.0",
+  "description": "An engine for hand-placed 2D pixel art, directed by an LLM. Palette-indexed cels, ramp discipline, deterministic audit, vision loop.",
+  "type": "commonjs",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "dependencies": {},
+  "bin": {
+    "pixelhand": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node test/smoke.test.js && node test/integration.test.js",
+    "test:smoke": "node test/smoke.test.js",
+    "test:integration": "node test/integration.test.js",
+    "bench": "node bench/benchmark.js",
+    "gate1": "node bench/gate1-potion.js",
+    "gate2": "node bench/gate2-style.js",
+    "gate3": "node bench/gate3-character.js",
+    "gate3:walk": "node bench/gate3-walk.js",
+    "gate4": "node bench/gate4-weapons.js",
+    "gate6": "node bench/gate6-scene.js",
+    "gates": "node bench/gate1-potion.js && node bench/gate2-style.js && node bench/gate3-character.js && node bench/gate3-walk.js && node bench/gate4-weapons.js && node bench/gate6-scene.js",
+    "port:keeper": "node tools/port-keeper.js",
+    "cli": "node src/cli.js",
+    "mcp": "node src/mcp.js",
+    "tools": "node src/cli.js list"
+  },
+  "keywords": [
+    "pixel-art",
+    "2d",
+    "sprite",
+    "palette-indexed",
+    "llm",
+    "mcp",
+    "game-art"
+  ],
+  "license": "UNLICENSED"
+}

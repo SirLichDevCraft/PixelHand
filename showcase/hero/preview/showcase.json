@@ -1,0 +1,3031 @@
+{
+  "character": "Rowan, the woodland pathfinder",
+  "dimensions": "32x40",
+  "baseline": 36,
+  "authoredDirections": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "authoredParts": 112,
+  "frames": 32,
+  "cycle": {
+    "ok": true,
+    "changed": {
+      "pixels": 0,
+      "added": 0,
+      "removed": 0,
+      "repainted": 0
+    },
+    "region": null,
+    "violations": [],
+    "warnings": [
+      "every frame of 'walk' lasts 100ms — that is a metronome, not a rhythm. A hold is a LONGER duration, never a duplicated frame (docs/03 §3)."
+    ],
+    "clip": "walk",
+    "fps": 10,
+    "cycle_ms": 400,
+    "per_frame": [
+      100,
+      100,
+      100,
+      100
+    ],
+    "durations": [
+      100,
+      100,
+      100,
+      100
+    ]
+  },
+  "loopValidation": {
+    "down": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 1,
+      "anchorSpread": 0,
+      "areas": [
+        347,
+        332,
+        338,
+        352
+      ],
+      "areaSpread": 20,
+      "areaRatio": 0.06,
+      "collisions": 0,
+      "loopDelta": 262,
+      "avgFrameDelta": 191,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 3,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "down-right": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 1,
+      "anchorSpread": 1,
+      "areas": [
+        353,
+        349,
+        359,
+        384
+      ],
+      "areaSpread": 35,
+      "areaRatio": 0.1,
+      "collisions": 0,
+      "loopDelta": 310,
+      "avgFrameDelta": 232,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "right": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 0,
+      "anchorSpread": 1,
+      "areas": [
+        364,
+        350,
+        361,
+        370
+      ],
+      "areaSpread": 20,
+      "areaRatio": 0.06,
+      "collisions": 0,
+      "loopDelta": 298,
+      "avgFrameDelta": 227,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "up-right": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 1,
+      "anchorSpread": 2,
+      "areas": [
+        368,
+        340,
+        350,
+        345
+      ],
+      "areaSpread": 28,
+      "areaRatio": 0.08,
+      "collisions": 0,
+      "loopDelta": 319,
+      "avgFrameDelta": 244,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "up": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 1,
+      "anchorSpread": 0,
+      "areas": [
+        353,
+        329,
+        335,
+        347
+      ],
+      "areaSpread": 24,
+      "areaRatio": 0.07,
+      "collisions": 0,
+      "loopDelta": 240,
+      "avgFrameDelta": 182,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 3,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "up-left": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 1,
+      "anchorSpread": 3,
+      "areas": [
+        351,
+        335,
+        338,
+        352
+      ],
+      "areaSpread": 17,
+      "areaRatio": 0.05,
+      "collisions": 0,
+      "loopDelta": 293,
+      "avgFrameDelta": 224,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "left": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 0,
+      "anchorSpread": 2.5,
+      "areas": [
+        338,
+        334,
+        337,
+        355
+      ],
+      "areaSpread": 21,
+      "areaRatio": 0.06,
+      "collisions": 0,
+      "loopDelta": 295,
+      "avgFrameDelta": 236,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 3,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 2,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    },
+    "down-left": {
+      "ok": true,
+      "problems": [],
+      "footSpread": 1,
+      "anchorSpread": 3,
+      "areas": [
+        344,
+        337,
+        339,
+        357
+      ],
+      "areaSpread": 20,
+      "areaRatio": 0.06,
+      "collisions": 0,
+      "loopDelta": 309,
+      "avgFrameDelta": 242,
+      "motionCoverage": {
+        "ok": true,
+        "frameCount": 4,
+        "parts": [
+          {
+            "name": "leg_far",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 2,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "arm_far",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "cloak",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "body",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "head",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 1,
+            "shapeChanged": false,
+            "positionVariants": 3,
+            "maxTravel": 1,
+            "meaningful": false
+          },
+          {
+            "name": "leg_near",
+            "frames": 4,
+            "distinctPoses": 4,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 4,
+            "maxTravel": 2,
+            "meaningful": true
+          },
+          {
+            "name": "arm_near",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          },
+          {
+            "name": "blade",
+            "frames": 4,
+            "distinctPoses": 3,
+            "shapeVariants": 3,
+            "shapeChanged": true,
+            "positionVariants": 3,
+            "maxTravel": 4,
+            "meaningful": true
+          }
+        ],
+        "groups": [
+          {
+            "group": "legs",
+            "parts": [
+              "leg_far",
+              "leg_near"
+            ],
+            "moving": [
+              "leg_far",
+              "leg_near"
+            ],
+            "shapeChanged": [
+              "leg_far",
+              "leg_near"
+            ],
+            "ok": true
+          },
+          {
+            "group": "arms",
+            "parts": [
+              "arm_far",
+              "arm_near"
+            ],
+            "moving": [
+              "arm_far",
+              "arm_near"
+            ],
+            "shapeChanged": [
+              "arm_far",
+              "arm_near"
+            ],
+            "ok": true
+          }
+        ],
+        "movingParts": [
+          "leg_far",
+          "arm_far",
+          "leg_near",
+          "arm_near",
+          "blade"
+        ],
+        "coverage": 0.63,
+        "shapeCoverage": 0.63,
+        "findings": []
+      }
+    }
+  },
+  "contactSheet": "preview/walk-contact.png",
+  "silhouetteSheet": "preview/walk-silhouettes.png",
+  "motionCoverage": {
+    "down": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 3,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "down-right": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "right": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "up-right": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "up": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 3,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "up-left": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "left": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 3,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 2,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    },
+    "down-left": {
+      "ok": true,
+      "frameCount": 4,
+      "parts": [
+        {
+          "name": "leg_far",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 2,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "arm_far",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "cloak",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "body",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "head",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 1,
+          "shapeChanged": false,
+          "positionVariants": 3,
+          "maxTravel": 1,
+          "meaningful": false
+        },
+        {
+          "name": "leg_near",
+          "frames": 4,
+          "distinctPoses": 4,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 4,
+          "maxTravel": 2,
+          "meaningful": true
+        },
+        {
+          "name": "arm_near",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        },
+        {
+          "name": "blade",
+          "frames": 4,
+          "distinctPoses": 3,
+          "shapeVariants": 3,
+          "shapeChanged": true,
+          "positionVariants": 3,
+          "maxTravel": 4,
+          "meaningful": true
+        }
+      ],
+      "groups": [
+        {
+          "group": "legs",
+          "parts": [
+            "leg_far",
+            "leg_near"
+          ],
+          "moving": [
+            "leg_far",
+            "leg_near"
+          ],
+          "shapeChanged": [
+            "leg_far",
+            "leg_near"
+          ],
+          "ok": true
+        },
+        {
+          "group": "arms",
+          "parts": [
+            "arm_far",
+            "arm_near"
+          ],
+          "moving": [
+            "arm_far",
+            "arm_near"
+          ],
+          "shapeChanged": [
+            "arm_far",
+            "arm_near"
+          ],
+          "ok": true
+        }
+      ],
+      "movingParts": [
+        "leg_far",
+        "arm_far",
+        "leg_near",
+        "arm_near",
+        "blade"
+      ],
+      "coverage": 0.63,
+      "shapeCoverage": 0.63,
+      "findings": []
+    }
+  },
+  "animation": "preview/walk-all-directions.gif",
+  "perFacing": [
+    {
+      "direction": "down",
+      "image": "preview/walk-down.gif"
+    },
+    {
+      "direction": "down-right",
+      "image": "preview/walk-down-right.gif"
+    },
+    {
+      "direction": "right",
+      "image": "preview/walk-right.gif"
+    },
+    {
+      "direction": "up-right",
+      "image": "preview/walk-up-right.gif"
+    },
+    {
+      "direction": "up",
+      "image": "preview/walk-up.gif"
+    },
+    {
+      "direction": "up-left",
+      "image": "preview/walk-up-left.gif"
+    },
+    {
+      "direction": "left",
+      "image": "preview/walk-left.gif"
+    },
+    {
+      "direction": "down-left",
+      "image": "preview/walk-down-left.gif"
+    }
+  ],
+  "portrait": "preview/rowan-down.png",
+  "audit": {
+    "errors": 2,
+    "warns": 3,
+    "grade": "background",
+    "craft": 0.674,
+    "findings": [
+      {
+        "rule": "off_ramp_colour",
+        "severity": "warn",
+        "at": [
+          "18,15",
+          "23,21",
+          "10,24",
+          "10,25"
+        ],
+        "fix": "re-pick each pixel to a step of its own ramp that touches a pixel of that ramp",
+        "message": "4 material pixel(s) touch no pixel of their own ramp — the colour is stranded, which reads as muddiness."
+      },
+      {
+        "rule": "ramp_jump",
+        "severity": "error",
+        "at": [
+          "13,17",
+          "13,18"
+        ],
+        "fix": "insert the intermediate ramp step between each pair, or move to a neighbouring step",
+        "message": "2 adjacent same-material pair(s) skip 3+ ramp steps."
+      },
+      {
+        "rule": "boundary_invisible",
+        "severity": "warn",
+        "at": [
+          "14,12",
+          "15,12",
+          "12,19",
+          "12,20",
+          "12,21",
+          "12,22"
+        ],
+        "fix": "separate those two parts with a value step, an outline pixel, or a darker seam",
+        "message": "6 boundary pair(s) between different materials are inseparable: too close in value, and either the same hue or too desaturated for hue to carry the boundary — at game scale those parts fuse."
+      },
+      {
+        "rule": "light_direction",
+        "severity": "error",
+        "at": [
+          "cloak",
+          "leather",
+          "leather"
+        ],
+        "fix": "move the lit steps of each listed region toward the light side of that region",
+        "message": "3/3 modelled region(s) disagree with the declared light direction (-0.7,-0.7): 'cloak' this region's light direction is off-axis from every declared light; 'leather' this region is lit from the opposite side to every declared light; 'leather' this region is lit from the opposite side to every declared light"
+      },
+      {
+        "rule": "cluster_character",
+        "severity": "warn",
+        "at": [],
+        "fix": "paint in 2-4px clusters; break slabs with a ramp step, merge lone pixels into neighbours",
+        "message": "cluster profile 25 lone / 31 hand-sized (2-6px) / 1 slab(s) of >24px — hand-made art paints in clusters, generated art paints in noise and slabs"
+      }
+    ]
+  },
+  "auditAllFrames": {
+    "frames": 32,
+    "errors": 88,
+    "warns": 116
+  },
+  "exportGate": {
+    "ok": false,
+    "changed": {
+      "pixels": 0,
+      "added": 0,
+      "removed": 0,
+      "repainted": 0
+    },
+    "region": null,
+    "violations": [],
+    "warnings": [],
+    "blocks": [
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-right",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "flat_mass",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "flat_mass",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "flat_mass",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "right",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "flat_mass",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-right",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "ramp_jump",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "up-left",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "disconnected_mass"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "detached_speck",
+          "flat_mass"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "detached_speck",
+          "flat_mass"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "detached_speck",
+          "flat_mass"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "left",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "detached_speck",
+          "disconnected_mass",
+          "flat_mass",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "contact",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "contact",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "flat_mass"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "down",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "down",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "passing",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "passing",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "light_direction"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "up",
+        "rule": "assert_style",
+        "violations": [
+          "lone_pixel"
+        ]
+      },
+      {
+        "clip": "walk",
+        "direction": "down-left",
+        "frame": "up",
+        "rule": "audit",
+        "violations": [
+          "lone_pixel",
+          "disconnected_mass",
+          "light_direction"
+        ]
+      }
+    ],
+    "summary": "EXPORT REFUSED: 64 gate failure(s)"
+  }
+}

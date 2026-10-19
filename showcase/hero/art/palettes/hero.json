@@ -1,0 +1,66 @@
+{
+  "id": "hero",
+  "origin": "derived in-repo from declared base hues",
+  "base_hues": null,
+  "ramps": {
+    "cloak": {
+      "role": "material",
+      "colors": [
+        "#263b42",
+        "#315a59",
+        "#4c8170",
+        "#83a878"
+      ]
+    },
+    "leather": {
+      "role": "material",
+      "colors": [
+        "#493641",
+        "#795043",
+        "#b06b4b"
+      ]
+    },
+    "skin": {
+      "role": "material",
+      "colors": [
+        "#9e594b",
+        "#d18462",
+        "#f2bb79"
+      ]
+    },
+    "steel": {
+      "role": "material",
+      "colors": [
+        "#52636a",
+        "#91a5a0",
+        "#d2d5b6"
+      ]
+    },
+    "hair": {
+      "role": "material",
+      "colors": [
+        "#392e3a",
+        "#65413e",
+        "#9a5c42"
+      ]
+    }
+  },
+  "single": {
+    "ink": {
+      "rgb": "#211f2b",
+      "role": "outline"
+    },
+    "ember": {
+      "rgb": "#e5674f",
+      "role": "accent"
+    },
+    "brass": {
+      "rgb": "#f0c660",
+      "role": "accent"
+    },
+    "glint": {
+      "rgb": "#f7e4a1",
+      "role": "highlight"
+    }
+  }
+}

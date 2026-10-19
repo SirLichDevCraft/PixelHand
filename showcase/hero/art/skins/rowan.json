@@ -1,0 +1,1175 @@
+{
+  "palette": "hero",
+  "sprite": "rowan",
+  "parts": [
+    {
+      "direction": "down",
+      "name": "cloak",
+      "cel_key": "part/down/cloak",
+      "joint": "origin",
+      "offset": [
+        10,
+        14
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "body",
+      "cel_key": "part/down/body",
+      "joint": "hip",
+      "offset": [
+        -5,
+        -13
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "head",
+      "cel_key": "part/down/head",
+      "joint": "head",
+      "offset": [
+        -4,
+        -4
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_far",
+      "cel_key": "part/down/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_near",
+      "cel_key": "part/down/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "arm_far",
+      "cel_key": "part/down/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "arm_near",
+      "cel_key": "part/down/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "blade",
+      "cel_key": "part/down/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/down/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/down/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/down/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/down/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -5,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/down/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "direction": "down",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/down/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -5,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "cloak",
+      "cel_key": "part/down-right/cloak",
+      "joint": "origin",
+      "offset": [
+        11,
+        14
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "body",
+      "cel_key": "part/down-right/body",
+      "joint": "hip",
+      "offset": [
+        -5,
+        -13
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "head",
+      "cel_key": "part/down-right/head",
+      "joint": "head",
+      "offset": [
+        -4,
+        -4
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_far",
+      "cel_key": "part/down-right/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_near",
+      "cel_key": "part/down-right/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "arm_far",
+      "cel_key": "part/down-right/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "arm_near",
+      "cel_key": "part/down-right/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "blade",
+      "cel_key": "part/down-right/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/down-right/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/down-right/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/down-right/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/down-right/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/down-right/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "down-right",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/down-right/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "cloak",
+      "cel_key": "part/right/cloak",
+      "joint": "origin",
+      "offset": [
+        11,
+        14
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "body",
+      "cel_key": "part/right/body",
+      "joint": "hip",
+      "offset": [
+        -4,
+        -13
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "head",
+      "cel_key": "part/right/head",
+      "joint": "head",
+      "offset": [
+        -4,
+        -3
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_far",
+      "cel_key": "part/right/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_near",
+      "cel_key": "part/right/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "arm_far",
+      "cel_key": "part/right/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "arm_near",
+      "cel_key": "part/right/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "blade",
+      "cel_key": "part/right/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/right/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/right/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/right/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/right/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/right/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "right",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/right/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "cloak",
+      "cel_key": "part/up-right/cloak",
+      "joint": "origin",
+      "offset": [
+        11,
+        14
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "body",
+      "cel_key": "part/up-right/body",
+      "joint": "hip",
+      "offset": [
+        -5,
+        -13
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "head",
+      "cel_key": "part/up-right/head",
+      "joint": "head",
+      "offset": [
+        -4,
+        -4
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_far",
+      "cel_key": "part/up-right/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_near",
+      "cel_key": "part/up-right/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "arm_far",
+      "cel_key": "part/up-right/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "arm_near",
+      "cel_key": "part/up-right/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "blade",
+      "cel_key": "part/up-right/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/up-right/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/up-right/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/up-right/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/up-right/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/up-right/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "up-right",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/up-right/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "cloak",
+      "cel_key": "part/up/cloak",
+      "joint": "origin",
+      "offset": [
+        10,
+        14
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "body",
+      "cel_key": "part/up/body",
+      "joint": "hip",
+      "offset": [
+        -5,
+        -13
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "head",
+      "cel_key": "part/up/head",
+      "joint": "head",
+      "offset": [
+        -4,
+        -4
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_far",
+      "cel_key": "part/up/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_near",
+      "cel_key": "part/up/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "arm_far",
+      "cel_key": "part/up/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "arm_near",
+      "cel_key": "part/up/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "blade",
+      "cel_key": "part/up/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/up/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/up/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/up/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/up/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -5,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/up/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "direction": "up",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/up/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -5,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "cloak",
+      "cel_key": "part/up-left/cloak",
+      "joint": "origin",
+      "offset": [
+        9,
+        14
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "body",
+      "cel_key": "part/up-left/body",
+      "joint": "hip",
+      "offset": [
+        -5,
+        -13
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "head",
+      "cel_key": "part/up-left/head",
+      "joint": "head",
+      "offset": [
+        -7,
+        -4
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_far",
+      "cel_key": "part/up-left/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_near",
+      "cel_key": "part/up-left/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "arm_far",
+      "cel_key": "part/up-left/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "arm_near",
+      "cel_key": "part/up-left/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "blade",
+      "cel_key": "part/up-left/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/up-left/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/up-left/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/up-left/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/up-left/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -6,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/up-left/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "direction": "up-left",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/up-left/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -6,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "cloak",
+      "cel_key": "part/left/cloak",
+      "joint": "origin",
+      "offset": [
+        9,
+        14
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "body",
+      "cel_key": "part/left/body",
+      "joint": "hip",
+      "offset": [
+        -4,
+        -13
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "head",
+      "cel_key": "part/left/head",
+      "joint": "head",
+      "offset": [
+        -7,
+        -3
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_far",
+      "cel_key": "part/left/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_near",
+      "cel_key": "part/left/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "arm_far",
+      "cel_key": "part/left/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "arm_near",
+      "cel_key": "part/left/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "blade",
+      "cel_key": "part/left/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/left/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/left/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/left/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/left/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -6,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/left/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "direction": "left",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/left/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -6,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "cloak",
+      "cel_key": "part/down-left/cloak",
+      "joint": "origin",
+      "offset": [
+        9,
+        14
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "body",
+      "cel_key": "part/down-left/body",
+      "joint": "hip",
+      "offset": [
+        -5,
+        -13
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "head",
+      "cel_key": "part/down-left/head",
+      "joint": "head",
+      "offset": [
+        -7,
+        -4
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_far",
+      "cel_key": "part/down-left/leg_far",
+      "joint": "hip",
+      "offset": [
+        -8,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_near",
+      "cel_key": "part/down-left/leg_near",
+      "joint": "hip",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "arm_far",
+      "cel_key": "part/down-left/arm_far",
+      "joint": "shoulder",
+      "offset": [
+        -7,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "arm_near",
+      "cel_key": "part/down-left/arm_near",
+      "joint": "shoulder",
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "blade",
+      "cel_key": "part/down-left/blade",
+      "joint": "grip",
+      "offset": [
+        -2,
+        -11
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_near",
+      "pose": "plant_near",
+      "cel_key": "part/down-left/plant_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_far",
+      "pose": "plant_far",
+      "cel_key": "part/down-left/plant_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_near",
+      "pose": "swing_near",
+      "cel_key": "part/down-left/swing_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_far",
+      "pose": "swing_far",
+      "cel_key": "part/down-left/swing_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -6,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_near",
+      "pose": "swing_high_near",
+      "cel_key": "part/down-left/swing_high_near/leg_near",
+      "joint": "hip",
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "direction": "down-left",
+      "name": "leg_far",
+      "pose": "swing_high_far",
+      "cel_key": "part/down-left/swing_high_far/leg_far",
+      "joint": "hip",
+      "offset": [
+        -6,
+        0
+      ]
+    }
+  ],
+  "id": "rowan"
+}

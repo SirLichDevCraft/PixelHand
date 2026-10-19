@@ -1,0 +1,227 @@
+{
+  "id": "walk",
+  "template": "walk",
+  "directions": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "fps": 8,
+  "notes": "",
+  "sprite": "keeper",
+  "frames_by_direction": {
+    "down": [
+      {
+        "cel": "walk/down/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/down/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/down/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/down/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "down-right": [
+      {
+        "cel": "walk/down-right/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/down-right/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/down-right/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/down-right/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "right": [
+      {
+        "cel": "walk/right/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/right/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/right/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/right/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "up-right": [
+      {
+        "cel": "walk/up-right/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/up-right/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/up-right/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/up-right/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "up": [
+      {
+        "cel": "walk/up/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/up/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/up/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/up/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "up-left": [
+      {
+        "cel": "walk/up-left/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/up-left/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/up-left/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/up-left/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "left": [
+      {
+        "cel": "walk/left/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/left/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/left/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/left/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ],
+    "down-left": [
+      {
+        "cel": "walk/down-left/f0",
+        "pose": "contact",
+        "duration": 38,
+        "events": []
+      },
+      {
+        "cel": "walk/down-left/f1",
+        "pose": "down",
+        "duration": 28,
+        "events": []
+      },
+      {
+        "cel": "walk/down-left/f2",
+        "pose": "passing",
+        "duration": 18,
+        "events": []
+      },
+      {
+        "cel": "walk/down-left/f3",
+        "pose": "up",
+        "duration": 43,
+        "events": []
+      }
+    ]
+  }
+}

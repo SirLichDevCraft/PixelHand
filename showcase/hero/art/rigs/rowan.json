@@ -1,0 +1,336 @@
+{
+  "canvas": [
+    32,
+    40
+  ],
+  "baseline": 36,
+  "anchors": {
+    "down": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        16,
+        8
+      ],
+      "shoulder": [
+        16,
+        16
+      ],
+      "hip": [
+        16,
+        27
+      ],
+      "feet": [
+        16,
+        36
+      ],
+      "grip": [
+        24,
+        24
+      ]
+    },
+    "down-right": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        18,
+        8
+      ],
+      "shoulder": [
+        18,
+        16
+      ],
+      "hip": [
+        18,
+        27
+      ],
+      "feet": [
+        18,
+        36
+      ],
+      "grip": [
+        26,
+        24
+      ]
+    },
+    "right": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        19,
+        8
+      ],
+      "shoulder": [
+        19,
+        16
+      ],
+      "hip": [
+        19,
+        27
+      ],
+      "feet": [
+        19,
+        36
+      ],
+      "grip": [
+        27,
+        24
+      ]
+    },
+    "up-right": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        18,
+        8
+      ],
+      "shoulder": [
+        18,
+        16
+      ],
+      "hip": [
+        18,
+        27
+      ],
+      "feet": [
+        18,
+        36
+      ],
+      "grip": [
+        10,
+        24
+      ]
+    },
+    "up": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        16,
+        8
+      ],
+      "shoulder": [
+        16,
+        16
+      ],
+      "hip": [
+        16,
+        27
+      ],
+      "feet": [
+        16,
+        36
+      ],
+      "grip": [
+        8,
+        24
+      ]
+    },
+    "up-left": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        14,
+        8
+      ],
+      "shoulder": [
+        14,
+        16
+      ],
+      "hip": [
+        14,
+        27
+      ],
+      "feet": [
+        14,
+        36
+      ],
+      "grip": [
+        6,
+        24
+      ]
+    },
+    "left": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        13,
+        8
+      ],
+      "shoulder": [
+        13,
+        16
+      ],
+      "hip": [
+        13,
+        27
+      ],
+      "feet": [
+        13,
+        36
+      ],
+      "grip": [
+        5,
+        24
+      ]
+    },
+    "down-left": {
+      "origin": [
+        0,
+        0
+      ],
+      "head": [
+        14,
+        8
+      ],
+      "shoulder": [
+        14,
+        16
+      ],
+      "hip": [
+        14,
+        27
+      ],
+      "feet": [
+        14,
+        36
+      ],
+      "grip": [
+        6,
+        24
+      ]
+    }
+  },
+  "zOrder": {
+    "down": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "down-right": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "right": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "up-right": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "up": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "up-left": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "left": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ],
+    "down-left": [
+      "leg_far",
+      "arm_far",
+      "cloak",
+      "body",
+      "head",
+      "leg_near",
+      "arm_near",
+      "blade"
+    ]
+  },
+  "partJoints": {
+    "leg_far": {
+      "joint": "hip"
+    },
+    "leg_near": {
+      "joint": "hip"
+    },
+    "cloak": {
+      "joint": "origin"
+    },
+    "blade": {
+      "joint": "grip"
+    },
+    "body": {
+      "joint": "hip"
+    },
+    "head": {
+      "joint": "head"
+    },
+    "arm_far": {
+      "joint": "shoulder"
+    },
+    "arm_near": {
+      "joint": "shoulder"
+    }
+  },
+  "limbWidth": {
+    "leg": 4,
+    "arm": 3
+  },
+  "gaitStride": 1.4,
+  "gaitParts": {
+    "arm_near": "hinged",
+    "arm_far": "hinged",
+    "blade": "held"
+  },
+  "id": "rowan"
+}

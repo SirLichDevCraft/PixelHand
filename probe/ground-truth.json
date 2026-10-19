@@ -1,0 +1,80 @@
+{
+  "A": {
+    "size": [
+      256,
+      256
+    ],
+    "zoom": 32,
+    "grid": [
+      "KRGBYMCW",
+      "RKBGMYWC",
+      "GBKMCWRY",
+      "BGMKWCYR",
+      "YMCWKRGB",
+      "MYWCRKBG",
+      "CWMYGBKR",
+      "WCYRBGMK"
+    ]
+  },
+  "B": {
+    "size": [
+      8,
+      8
+    ],
+    "zoom": 1,
+    "grid": [
+      "KRGBYMCW",
+      "RKBGMYWC",
+      "GBKMCWRY",
+      "BGMKWCYR",
+      "YMCWKRGB",
+      "MYWCRKBG",
+      "CWMYGBKR",
+      "WCYRBGMK"
+    ]
+  },
+  "C": {
+    "size": [
+      320,
+      480
+    ],
+    "zoom": 20,
+    "art": [
+      16,
+      24
+    ],
+    "counts": [
+      [
+        "B",
+        56
+      ],
+      [
+        "M",
+        30
+      ],
+      [
+        "K",
+        26
+      ],
+      [
+        "Y",
+        24
+      ],
+      [
+        "R",
+        8
+      ]
+    ]
+  },
+  "D": {
+    "size": [
+      768,
+      192
+    ],
+    "zoom": 12,
+    "art": [
+      64,
+      16
+    ]
+  }
+}

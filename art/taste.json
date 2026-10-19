@@ -1,0 +1,39 @@
+{
+  "_comment": "Taste memory per docs/11-collaboration.md. Written by the engine, read by every future session. Decisions are yours; measurements are mine.",
+  "project": "pixelhand-coverage",
+  "style": "undeclared",
+  "rounds": [
+    {
+      "round": 1,
+      "axis": "exaggeration_axis",
+      "subject": "pistol 32x32",
+      "stage": "silhouette",
+      "options": {
+        "A": { "name": "barrel-forward", "measured": { "barrel": 10, "grip": "6x8", "enclosed_air": 0, "open_air": "33%" } },
+        "B": { "name": "grip-forward",   "measured": { "barrel": 5,  "grip": "12x12", "enclosed_air": 0, "open_air": "42%" } },
+        "C": { "name": "accurate",       "measured": { "barrel": 6,  "grip": "6x13", "enclosed_air": 7, "open_air": "50%" } }
+      },
+      "engine_findings": [
+        "A fails: a 10px barrel band merges slide and grip into one brick; zero enclosed air means the trigger guard is not a loop",
+        "B has the correct barrel proportion (5px band) and the widest open air, but its guard is a hook, not a loop",
+        "C is the only option with a real guard loop (7px enclosed air) but its 6x13 grip reads as a stick, not a handle",
+        "synthesis proposed for round 2: B's barrel/grip proportions + C's guard loop"
+      ],
+      "decision": "pending",
+      "decided_by": null
+    }
+  ],
+  "rejected_patterns_so_far": [
+    { "pattern": "barrel band >= 9px at 32x32", "reason": "merges barrel and grip into one mass", "measured": true },
+    { "pattern": "grip narrower than 7px at 32x32", "reason": "reads as a stick, not a handle", "measured": true },
+    { "pattern": "silhouette with zero enclosed air on a functional object", "reason": "no legible function", "measured": true }
+  ],
+  "accepted_patterns_so_far": [],
+  "vocabulary": {
+    "muddy": "anti-aliasing or dither crossing hue families; ramp steps too close in value",
+    "busy": "detail budget exceeded; lone pixels; texture clusters too dense",
+    "flat": "insufficient value contrast; ramp compressed",
+    "floats": "missing contact shadow or anchor drift",
+    "hard to read": "silhouette failure at squint scale; feature budget exceeded"
+  }
+}
