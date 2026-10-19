@@ -1,0 +1,55 @@
+{
+  "id": "starfall",
+  "style": "starfall",
+  "palette": "starfall",
+  "canvas": {
+    "w": 384,
+    "h": 224
+  },
+  "anchor": {
+    "x": 222,
+    "y": 148
+  },
+  "layers": [
+    {
+      "id": "body",
+      "z": 0
+    }
+  ],
+  "rig": null,
+  "directions": [
+    "down"
+  ],
+  "clips": [],
+  "cels": {
+    "ambient/f0": "cels/ambient%2Ff0.grid",
+    "ambient/f1": "cels/ambient%2Ff1.grid",
+    "ambient/f2": "cels/ambient%2Ff2.grid",
+    "ambient/f3": "cels/ambient%2Ff3.grid",
+    "ambient/f4": "cels/ambient%2Ff4.grid",
+    "ambient/f5": "cels/ambient%2Ff5.grid",
+    "ambient/f6": "cels/ambient%2Ff6.grid",
+    "ambient/f7": "cels/ambient%2Ff7.grid"
+  },
+  "tier": "hero",
+  "asset_class": "scene",
+  "design": {
+    "primary_read": "a lantern-bearing traveler approaches an observatory suspended above a sea of clouds",
+    "focal_accent": "the warm celestial window",
+    "provenance_note": "original code-authored pixels; no imported or generated images"
+  },
+  "provenance": {
+    "authored_by": "agent",
+    "directed_by": "user",
+    "engine": "pixelhand 0.2.0-rc.1",
+    "style_bible": "starfall",
+    "palette_file": "art/palettes/starfall.json",
+    "palette_origin": "derived in-repo from declared base hues",
+    "authored_pixels": 1290240,
+    "imported_pixels": 0,
+    "authored_share": 1,
+    "generative_model_used": null,
+    "sources": [],
+    "edit_ops": 15
+  }
+}

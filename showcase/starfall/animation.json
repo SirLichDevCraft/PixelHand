@@ -1,0 +1,47 @@
+{
+  "title": "The Starfall Archive",
+  "native": [
+    384,
+    224
+  ],
+  "display_scale": 3,
+  "palette_colors": 48,
+  "duration_ms": 160,
+  "loop": true,
+  "frames": [
+    {
+      "cel": "ambient/f0",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f1",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f2",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f3",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f4",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f5",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f6",
+      "duration_ms": 160
+    },
+    {
+      "cel": "ambient/f7",
+      "duration_ms": 160
+    }
+  ],
+  "authored_with": "PixelHand public JavaScript API",
+  "license": "MIT"
+}

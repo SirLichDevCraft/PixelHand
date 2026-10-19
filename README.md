@@ -12,6 +12,14 @@ An open-source engine for creating sprites, animation, and game art through **MC
 
 ## Made with PixelHand
 
+### The Starfall Archive · animated environment
+
+A lantern-bearing traveler crosses an old stone bridge to an observatory above a sea of clouds. An original **384 × 224 scene**, with a **48-color palette** and **eight ambient animation frames**: falling water, drifting fireflies, and starlight.
+
+![The Starfall Archive: a copper-domed observatory, teal-roofed library, lantern-bearing traveler, and waterfalls above a moonlit sea of clouds](showcase/starfall/starfall.gif)
+
+[Still image](showcase/starfall/preview.png) · [Native pixels](showcase/starfall/native.png) · [Editable project and build notes](showcase/starfall/README.md) · [Authoring script](bench/showcase-starfall.js)
+
 ### Rowan · eight-direction walk
 
 An original 32 × 40 character with eight authored facings, four walk poses, layered limbs, and frame-by-frame review.

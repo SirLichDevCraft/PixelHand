@@ -16,6 +16,7 @@ Start with the [workflow guide](guide.md) for installation, agent connections, r
 
 ## Examples
 
+- [The Starfall Archive](../showcase/starfall/README.md): an original floating observatory scene with eight ambient animation frames and editable source.
 - [Lantern](../examples/lantern.js): a small authored example using the public JavaScript API.
 - [Rowan](../showcase/hero/README.md): an eight-facing character, animation previews, and audit results.
 - [Farmhouse](../showcase/farmhouse/README.md): an editable building study and its authoring script.

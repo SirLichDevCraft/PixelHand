@@ -1,0 +1,117 @@
+{
+  "id": "starfall",
+  "origin": "derived in-repo from declared base hues",
+  "base_hues": null,
+  "ramps": {
+    "night": {
+      "role": "material",
+      "colors": [
+        "#0c1121",
+        "#171e33",
+        "#242b46",
+        "#383e58"
+      ]
+    },
+    "cloud": {
+      "role": "material",
+      "colors": [
+        "#3a3855",
+        "#554968",
+        "#745d7c",
+        "#a08093"
+      ]
+    },
+    "stone": {
+      "role": "material",
+      "colors": [
+        "#202e3c",
+        "#344a57",
+        "#536976",
+        "#7d9397",
+        "#abb9ae",
+        "#d5d4b1"
+      ]
+    },
+    "wood": {
+      "role": "material",
+      "colors": [
+        "#302938",
+        "#573b47",
+        "#885847",
+        "#be855b"
+      ]
+    },
+    "copper": {
+      "role": "material",
+      "colors": [
+        "#41394c",
+        "#655064",
+        "#987077",
+        "#ce9584",
+        "#f1c49a"
+      ]
+    },
+    "roof": {
+      "role": "material",
+      "colors": [
+        "#193c49",
+        "#285e6a",
+        "#3d8790",
+        "#72b0aa",
+        "#b6d5bd"
+      ]
+    },
+    "moss": {
+      "role": "material",
+      "colors": [
+        "#173d3c",
+        "#285a4e",
+        "#47816a",
+        "#80a281",
+        "#c3c996"
+      ]
+    },
+    "water": {
+      "role": "material",
+      "colors": [
+        "#263d5f",
+        "#3c6483",
+        "#5794ac",
+        "#8fd0d5",
+        "#d4f1df"
+      ]
+    },
+    "gold": {
+      "role": "light",
+      "colors": [
+        "#8d5c4b",
+        "#ca8953",
+        "#edb866",
+        "#ffe0a0",
+        "#fff2ce"
+      ]
+    }
+  },
+  "single": {
+    "accent.0": {
+      "rgb": "#ae638b",
+      "role": "accent"
+    },
+    "accent.1": {
+      "rgb": "#e9a6bc",
+      "role": "accent"
+    },
+    "accent.2": {
+      "rgb": "#6485a3",
+      "role": "accent"
+    },
+    "accent.3": {
+      "rgb": "#99bad0",
+      "role": "accent"
+    },
+    "accent.4": {
+      "rgb": "#d7e1de",
+      "role": "accent"
+    }
+  }
+}

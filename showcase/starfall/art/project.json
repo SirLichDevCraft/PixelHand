@@ -1,0 +1,32 @@
+{
+  "id": "the-starfall-archive",
+  "created": "2026-10-19T15:57:28.638Z",
+  "engine": "pixelhand 0.2.0-rc.1",
+  "style": "starfall",
+  "canvas": {
+    "w": 384,
+    "h": 224
+  },
+  "directions": [
+    "down"
+  ],
+  "fps": 6.25,
+  "coordinate": {
+    "id": "starfall",
+    "projection": "three-quarter",
+    "art_scale": 128,
+    "palette_size": 48,
+    "temperature": "warm-cool-hue-shift",
+    "edge_policy": "selective-dark",
+    "shading": "ramp-lit",
+    "detail": "hyper",
+    "motion": "sub-asset",
+    "mood": "whimsical",
+    "light_vector": [
+      -0.7,
+      -0.7
+    ],
+    "signature": "brass starlight, patinated teal roofs, plum cloud banks, and warm windows above a quiet night"
+  },
+  "coordinate_warnings": []
+}
