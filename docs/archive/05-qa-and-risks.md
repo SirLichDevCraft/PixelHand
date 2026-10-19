@@ -1,5 +1,8 @@
 # 05 — Measurement, testing, export, risk register
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 ## 1. The audit rule set (deterministic critic)
 
 No automated visual critic exists on this setup — `models.getAvailableOfType` returned **0 classifiers and 0 image models**. So the critic stack is exactly two things, and both are load-bearing:
@@ -75,7 +78,7 @@ Rows = directions in the frozen declared order. Columns = frames in clip order. 
 
 Targets: **Godot** (SpriteFrames), **Phaser** (frames + animations), **Tiled** (tileset TSJSON), **Aseprite-compatible** sheet layout (so the user can open and polish in whatever editor they choose), and a plain generic manifest. Plus GIF/APNG previews for review, and indexed PNG for the engine itself. These are output *formats* only — no third-party code, assets or palettes enter the project because we can export to them.
 
-Every manifest carries the computed `provenance` block from `docs/07-provenance.md`: authored_by, directed_by, engine version, style bible, palette file and origin, `imported_pixels`, `generative_model_used`, and the source list. `export_sheet` refuses to include a quarantined cel unless `allow_imported: true` is passed explicitly.
+Every manifest carries the computed `provenance` block from `docs/archive/07-provenance.md`: authored_by, directed_by, engine version, style bible, palette file and origin, `imported_pixels`, `generative_model_used`, and the source list. `export_sheet` refuses to include a quarantined cel unless `allow_imported: true` is passed explicitly.
 
 Export is gated: a clip that fails `loop_validate` or `assert_style` cannot be exported. The gate is the point — it is what stops a long project from shipping its own drift.
 
@@ -96,7 +99,7 @@ Export is gated: a clip that fails `loop_validate` or `assert_style` cannot be e
 | **No automated visual critic available** | Medium | Deterministic audit carries the mechanical load; judgement renders carry the aesthetic load. Re-check model availability periodically. |
 | **MCP process dies mid-session** | Low | Disk is the source of truth; every cel is a text file; undo history is reconstructible from snapshots. |
 | **Windows path / encoding quirks** | Low | Absolute paths, forward slashes in JSON, UTF-8, no shell interpolation of grid text (grids go through tool args, never heredocs). |
-| **Third-party art contaminating the asset set** | High for publishing | `docs/07-provenance.md`: no third-party assets stored in the repo at all; `import_png` requires declared provenance and quarantines; provenance metadata computed from edit history and shipped in every manifest; palettes derived from declared base hues, never sampled. |
+| **Third-party art contaminating the asset set** | High for publishing | `docs/archive/07-provenance.md`: no third-party assets stored in the repo at all; `import_png` requires declared provenance and quarantines; provenance metadata computed from edit history and shipped in every manifest; palettes derived from declared base hues, never sampled. |
 
 ---
 

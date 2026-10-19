@@ -1,0 +1,18 @@
+name: Feature request
+description: Propose a useful workflow or capability.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to create?
+      description: Describe the task and where the current engine falls short.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: A concrete example, tool interaction, or preview is helpful. Mention alternatives you have tried.
+    validations:
+      required: true

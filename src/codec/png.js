@@ -107,28 +107,47 @@ function downscaleBox(w, h, rgb, factor) {
 }
 
 function decodePNG(buf) {
-  if (buf.readUInt32BE(0) !== 0x89504e47) throw new Error("not a PNG");
+  if (!Buffer.isBuffer(buf) || buf.length < 33 || !buf.subarray(0,8).equals(PNG_SIGNATURE)) throw new Error("not a PNG");
   let pos = 8, w = 0, h = 0, colorType = 0, bitDepth = 8, idat = [];
+  let header = false, ended = false;
   let plte = null, trns = null;
   while (pos < buf.length) {
+    if (pos + 12 > buf.length) throw new Error("truncated PNG chunk");
     const len = buf.readUInt32BE(pos);
+    if (len > buf.length - pos - 12) throw new Error("truncated PNG chunk data");
     const type = buf.toString("ascii", pos + 4, pos + 8);
     const data = buf.subarray(pos + 8, pos + 8 + len);
-    if (type === "IHDR") { w = data.readUInt32BE(0); h = data.readUInt32BE(4); bitDepth = data[8]; colorType = data[9]; }
+    if (crc32(buf.subarray(pos + 4, pos + 8 + len)) !== buf.readUInt32BE(pos + 8 + len)) throw new Error(`PNG ${type} checksum mismatch`);
+    if (!header && type !== "IHDR") throw new Error("PNG must start with IHDR");
+    if (type === "IHDR") {
+      if (header || len !== 13) throw new Error("invalid PNG header");
+      w = data.readUInt32BE(0); h = data.readUInt32BE(4); bitDepth = data[8]; colorType = data[9];
+      if (!w || !h || w * h > 32 * 1024 * 1024) throw new Error("PNG exceeds the 32-megapixel decode budget");
+      if (data[10] !== 0 || data[11] !== 0 || data[12] !== 0) throw new Error("unsupported PNG compression, filter method, or interlacing");
+      header = true;
+    }
     else if (type === "PLTE") plte = Buffer.from(data);
     else if (type === "tRNS") trns = Buffer.from(data);
     else if (type === "IDAT") idat.push(Buffer.from(data));
+    else if (type === "IEND") { if (len !== 0) throw new Error("invalid IEND"); ended = true; break; }
+    else if (type[0] === type[0].toUpperCase()) throw new Error(`unsupported critical PNG chunk ${type}`);
     pos += 12 + len;
   }
+  if (!ended || !idat.length) throw new Error("PNG is missing image data or IEND");
   if (bitDepth !== 8) throw new Error("unsupported bit depth " + bitDepth);
-  const channels = colorType === 3 ? 1 : colorType === 2 ? 3 : colorType === 6 ? 4 : colorType === 0 ? 1 : 4;
+  if (![0,2,3,4,6].includes(colorType)) throw new Error("unsupported PNG colour type " + colorType);
+  if (colorType === 3 && (!plte || !plte.length || plte.length % 3 || plte.length > 768)) throw new Error("invalid indexed PNG palette");
+  const channels = colorType === 3 ? 1 : colorType === 2 ? 3 : colorType === 6 ? 4 : colorType === 0 ? 1 : 2;
   const bpp = channels;
   const stride = w * bpp;
-  const raw = zlib.inflateSync(Buffer.concat(idat));
+  const expected = h * (stride + 1);
+  const raw = zlib.inflateSync(Buffer.concat(idat), { maxOutputLength: expected });
+  if (raw.length !== expected) throw new Error("PNG scanline size does not match the header");
   const out = Buffer.alloc(h * stride);
   let prev = Buffer.alloc(stride);
   for (let y = 0; y < h; y++) {
     const f = raw[y * (stride + 1)];
+    if (f > 4) throw new Error("unsupported PNG scanline filter " + f);
     const line = Buffer.from(raw.subarray(y * (stride + 1) + 1, y * (stride + 1) + 1 + stride));
     for (let x = 0; x < stride; x++) {
       const a = x >= bpp ? line[x - bpp] : 0;
@@ -151,12 +170,15 @@ function decodePNG(buf) {
     let r = 0, g = 0, b = 0, a = 255;
     if (colorType === 3) {
       const idx = out[i]; idxMap[i] = idx;
+      if (idx * 3 + 2 >= plte.length) throw new Error("PNG pixel references a missing palette entry");
       r = plte[idx * 3]; g = plte[idx * 3 + 1]; b = plte[idx * 3 + 2];
       if (trns && idx < trns.length) a = trns[idx];
     } else if (colorType === 6) { r = out[i*4]; g = out[i*4+1]; b = out[i*4+2]; a = out[i*4+3]; }
     else if (colorType === 2) { r = out[i*3]; g = out[i*3+1]; b = out[i*3+2]; }
     else if (colorType === 0) { r = g = b = out[i]; }
-    else { r = out[i*4]; g = out[i*4+1]; b = out[i*4+2]; a = out[i*4+3]; }
+    else { r = g = b = out[i*2]; a = out[i*2+1]; }
+    if (colorType === 0 && trns?.length === 2 && r === trns.readUInt16BE(0)) a = 0;
+    if (colorType === 2 && trns?.length === 6 && r === trns.readUInt16BE(0) && g === trns.readUInt16BE(2) && b === trns.readUInt16BE(4)) a = 0;
     rgba[i*4] = r; rgba[i*4+1] = g; rgba[i*4+2] = b; rgba[i*4+3] = a;
   }
   const palette = plte ? Array.from({ length: plte.length / 3 }, (_, k) =>

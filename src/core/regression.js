@@ -14,9 +14,10 @@ const crypto = require("crypto");
 const { audit } = require("../audit.js");
 const { assertStyle } = require("./style.js");
 const { loopValidate } = require("./rig.js");
+const { within } = require("./storage.js");
 const { craftScore } = require("../craft.js");
 
-const GOLDEN_DIR = (root) => path.join(root, "test", "golden");
+const GOLDEN_DIR = (root) => within(root, "test", "golden");
 
 function hash(buf) { return crypto.createHash("sha256").update(buf).digest("hex").slice(0, 16); }
 
@@ -24,9 +25,9 @@ function hash(buf) { return crypto.createHash("sha256").update(buf).digest("hex"
 function golden_capture(root, id, buffer, meta = {}) {
   const dir = GOLDEN_DIR(root);
   fs.mkdirSync(dir, { recursive: true });
-  const file = path.join(dir, `${id}.png`);
+  const file = within(dir, `${id}.png`);
   fs.writeFileSync(file, buffer);
-  const metaFile = path.join(dir, `${id}.json`);
+  const metaFile = within(dir, `${id}.json`);
   const record = { id, sha256: hash(buffer), bytes: buffer.length, captured: new Date().toISOString(), approved_by: meta.approved_by || "user", note: meta.note || "" };
   fs.writeFileSync(metaFile, JSON.stringify(record, null, 2));
   return record;
@@ -37,12 +38,12 @@ function golden_capture(root, id, buffer, meta = {}) {
  * change, never a surprise. Palette amendments route through here.
  */
 function regression_check(root, id, buffer, opts = {}) {
-  const metaFile = path.join(GOLDEN_DIR(root), `${id}.json`);
+  const metaFile = within(GOLDEN_DIR(root), `${id}.json`);
   if (!fs.existsSync(metaFile)) return { ok: false, rule: "no_golden", message: `no golden captured for '${id}'; capture one before relying on it as a bar` };
   const golden = JSON.parse(fs.readFileSync(metaFile, "utf8"));
   const now = hash(buffer);
   if (now === golden.sha256) return { ok: true, id, unchanged: true, golden };
-  const diffFile = path.join(GOLDEN_DIR(root), `${id}.diff.png`);
+  const diffFile = within(GOLDEN_DIR(root), `${id}.diff.png`);
   fs.writeFileSync(diffFile, buffer);
   return { ok: false, id, rule: "golden_mismatch", golden, current: { sha256: now, bytes: buffer.length }, diff_file: diffFile,
     message: `'${id}' changed since it was approved (${golden.bytes} -> ${buffer.length} bytes). Review ${diffFile}, then re-capture if the change is intended.` };
@@ -56,10 +57,11 @@ function regression_check(root, id, buffer, opts = {}) {
 function export_gate(clips, style, palette, opts = {}) {
   const blocks = [];
   const warns = [];
+  if (!Object.keys(clips).length) blocks.push({ clip: "none", direction: "none", rule: "no_clips", problems: ["No clips were supplied for validation"] });
   for (const [name, clip] of Object.entries(clips)) {
     for (const direction of clip.directions) {
       const frames = clip.frames(direction);
-      if (!frames.length) continue;
+      if (!frames.length) { blocks.push({ clip: name, direction, rule: "missing_direction_frames", problems: ["Declared direction has no authored frames"] }); continue; }
       const lv = loopValidate(frames, { requireCounterSwing: clip.template === "walk" });
       if (!lv.ok) blocks.push({ clip: name, direction, rule: "loop_validate", problems: lv.problems });
       for (const f of frames) {
@@ -72,7 +74,7 @@ function export_gate(clips, style, palette, opts = {}) {
         if (quarantined && !opts.allow_imported) blocks.push({ clip: name, direction, frame: f.poseName, rule: "imported_pixels", violations: [`cel contains ${f.cel.meta.imported_pixels ?? 'imported'} imported pixels; pass allow_imported: true explicitly to ship them`] });
       }
       const fc = clip.frameCountReport();
-      if (!fc.consistent) warns.push({ rule: "frame_count_mismatch_across_directions", clip: name, detail: fc.counts });
+      if (!fc.consistent) blocks.push({ rule: "frame_count_mismatch_across_directions", clip: name, direction, detail: fc.counts });
     }
   }
   return { ok: blocks.length === 0, blocks, warnings: warns, summary: blocks.length ? `EXPORT REFUSED: ${blocks.length} gate failure(s)` : "export gate passed" };
@@ -135,4 +137,17 @@ function craft_targets(cel, palette, style) {
   return { ok: misses.length === 0, scale: style.art_scale, target: t, measured, misses, craft: c.score, grade: c.grade, area: bb?.area ?? 0 };
 }
 
-module.exports = { golden_capture, regression_check, export_gate, craft_targets, CRAFT_TARGETS, hash };
+function static_gate(cels, style, palette, opts = {}) {
+  const blocks = [];
+  if (!cels.length) blocks.push({ rule: "no_cels", message: "No static cels supplied" });
+  for (const cel of cels) {
+    if (cel.paletteId !== palette.id) blocks.push({ cel:cel.name, rule:"palette_mismatch", message:"A sheet must use one declared palette" });
+    const checked = audit(cel, { palette, style });
+    const conformance = assertStyle(cel, style, palette, { assetClass:opts.assetClass || "object" });
+    if (!checked.ok) blocks.push({ cel:cel.name, rule:"audit", violations:checked.findings.filter(f=>f.severity==="error").map(f=>f.rule) });
+    if (!conformance.ok) blocks.push({ cel:cel.name, rule:"assert_style", violations:conformance.violations });
+    if (cel.meta?.imported && !opts.allow_imported) blocks.push({ cel:cel.name,rule:"imported_pixels" });
+  }
+  return {ok:blocks.length===0,blocks,warnings:[],summary:blocks.length?`EXPORT REFUSED: ${blocks.length} gate failure(s)`:"static export gate passed"};
+}
+module.exports = { golden_capture, regression_check, export_gate, static_gate, craft_targets, CRAFT_TARGETS, hash };

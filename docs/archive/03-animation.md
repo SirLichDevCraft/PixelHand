@@ -1,5 +1,8 @@
 # 03 — Animation: rigs, key poses, direction sets, timing
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 The requirement is the hard part: **high-detail sprites, with animation frames, with directions, with animations per direction.** This document is how that is done without the result collapsing into sliding rigid shapes — which my Phase 0 attempt proved is the default failure.
 
 ---

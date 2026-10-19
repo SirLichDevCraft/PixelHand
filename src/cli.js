@@ -17,6 +17,7 @@
 const fs = require("fs");
 const path = require("path");
 const { TOOLS, W, ROOT, OUT } = require("./tools.js");
+const { execute } = require("./execute.js");
 
 function parseValue(v) {
   if (v.startsWith("@")) return fs.readFileSync(v.slice(1), "utf8");
@@ -34,7 +35,13 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a.startsWith("--")) {
       const key = a.slice(2);
-      if (key === "json") { args.__json = JSON.parse(argv[++i]); continue; }
+      if (key === "json") {
+        const next = argv[i + 1];
+        if (!next || next.startsWith("--")) args.__output_json = true;
+        else if (next === "true") { args.__output_json = true; i++; }
+        else { args.__json = JSON.parse(argv[++i]); }
+        continue;
+      }
       if (key === "root") { args.__root = path.resolve(argv[++i]); continue; }
       if (key === "raw") { args.__raw = true; continue; }
       if (key === "quiet") { args.__quiet = true; continue; }
@@ -54,7 +61,7 @@ function printResult(name, res, opts = {}) {
   line(`${name}: ${status}`);
   if (res.changed && (res.changed.pixels || res.changed.added || res.changed.removed)) {
     line(`  changed  +${res.changed.added} -${res.changed.removed} ~${res.changed.repainted} total ${res.changed.pixels}`);
-  } else if (res.ok !== false && res.changed) {
+  } else if (res.ok !== false && res.changed && require("./production-tools.js").EDITS.has(name)) {
     line("  changed  NOTHING. The tool ran and touched zero pixels — that is a failure signal, not a success.");
   }
   if (res.region) line(`  region   x${res.region.x0}-${res.region.x1} y${res.region.y0}-${res.region.y1}`);
@@ -71,8 +78,11 @@ function printResult(name, res, opts = {}) {
 }
 
 function main(argv) {
-  const { args, positional } = parseArgs(argv);
+  let parsed;
+  try { parsed=parseArgs(argv); } catch(e) {process.stderr.write(`Invalid command arguments: ${e.message}\n`);return 2;}
+  const { args, positional } = parsed;
   const cmd = positional[0];
+  if(args.version || cmd==="version"){process.stdout.write(require("../package.json").version+"\n");return 0;}
 
   if (!cmd || cmd === "list" || cmd === "--help" || cmd === "-h") {
     process.stdout.write(`PixelHand — ${Object.keys(TOOLS).length} tools\n\n`);
@@ -83,21 +93,24 @@ function main(argv) {
   if (cmd === "help") {
     const t = TOOLS[positional[1]];
     if (!t) { process.stderr.write(`no tool '${positional[1]}'\n`); return 2; }
-    process.stdout.write(`${positional[1]}\n  ${t.describe}\n`);
+    process.stdout.write(JSON.stringify({ name: positional[1], description: t.describe, inputSchema: t.inputSchema, examples: t.examples, group: t.group }, null, 2) + "\n");
     return 0;
   }
   const tool = TOOLS[cmd];
   if (!tool) { process.stderr.write(`no tool '${cmd}'. Try: node src/cli.js list\n`); return 2; }
 
   const input = args.__json ? { ...args.__json } : args;
-  delete input.__json; delete input.__raw; delete input.__quiet;
   const root = args.__root || input.root || process.env.PIXELHAND_ROOT || ROOT;
+  const jsonOut = args.__output_json === true || input.json === true || process.env.PIXELHAND_JSON === "1";
+  delete input.__json; delete input.__raw; delete input.__quiet; delete input.__root;
+  delete input.__output_json;
   if (input.root) delete input.root;
+  delete input.json;
 
   try {
     if (!W.project) { try { W.load(root); } catch { /* tools that create a project supply their own root */ } }
-    const res = tool.run(input);
-    printResult(cmd, res, { json_out: input.json === true || process.env.PIXELHAND_JSON === "1" });
+    const res = execute(cmd, { ...input, root });
+    printResult(cmd, res, { json_out: jsonOut });
     return res.ok === false ? 1 : 0;
   } catch (e) {
     // A refusal is not a crash. "That cel does not exist" is the engine saying no for a reason,

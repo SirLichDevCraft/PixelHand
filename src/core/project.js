@@ -15,13 +15,14 @@ const { Palette } = require("./palette.js");
 const { validateCoordinate } = require("./style.js");
 const { DIRECTIONS } = require("./rig.js");
 const { decodePNG } = require("../codec/png.js");
+const storage = require("./storage.js");
 
-const ENGINE = "pixelhand 0.1";
+const ENGINE = `pixelhand ${require("../../package.json").version}`;
 
 const artRoot = (root) => path.join(root, "art");
 const ensure = (p) => { fs.mkdirSync(p, { recursive: true }); return p; };
 const readJSON = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
-const writeJSON = (p, v) => { ensure(path.dirname(p)); fs.writeFileSync(p, JSON.stringify(v, null, 2)); return p; };
+const writeJSON = storage.writeJSON;
 
 class Project {
   constructor(root, doc = null) {
@@ -121,7 +122,7 @@ class Project {
   rig_save(id, doc) {
     const full = { ...doc, id };
     this.rigs.set(id, full);
-    writeJSON(path.join(artRoot(this.root), "rigs", `${id}.json`), full);
+    writeJSON(storage.within(this.root, "art", "rigs", `${id}.json`), full);
     return full;
   }
   // A camera is git-tracked text too. A building authored against a horizon that a later session
@@ -129,7 +130,7 @@ class Project {
   perspective_save(id, doc) {
     const full = { ...doc, id };
     this.perspectives.set(id, full);
-    writeJSON(path.join(artRoot(this.root), "perspectives", `${id}.json`), full);
+    writeJSON(storage.within(this.root, "art", "perspectives", `${id}.json`), full);
     return full;
   }
   perspective_get(id) { return this.perspectives.get(id) || null; }
@@ -141,7 +142,7 @@ class Project {
   skin_save(id, doc) {
     const full = { ...doc, id };
     this.skins.set(id, full);
-    writeJSON(path.join(artRoot(this.root), "skins", `${id}.json`), full);
+    writeJSON(storage.within(this.root, "art", "skins", `${id}.json`), full);
     return full;
   }
   skin_get(id) { return this.skins.get(id) || null; }
@@ -150,7 +151,7 @@ class Project {
   clip_save(id, doc) {
     const full = { ...doc, id };
     this.clips.set(id, full);
-    writeJSON(path.join(artRoot(this.root), "clips", `${id}.json`), full);
+    writeJSON(storage.within(this.root, "art", "clips", `${id}.json`), full);
     return full;
   }
   clip_get(id) { return this.clips.get(id) || null; }
@@ -169,7 +170,7 @@ class Project {
     if (cap && pal.size > cap) problems.push({ rule: "palette_cap", severity: "error", message: `palette '${id}' has ${pal.size} entries; the coordinate caps at ${cap}` });
     if (problems.some(x => (x.severity || "error") === "error")) return { ok: false, problems, palette: null };
     this.palettes.set(id, pal);
-    writeJSON(path.join(artRoot(this.root), "palettes", `${id}.json`), { id, origin: spec.origin || "derived in-repo from declared base hues", base_hues: spec.base_hues || null, ramps: spec.ramps, single: spec.single });
+    writeJSON(storage.within(this.root, "art", "palettes", `${id}.json`), { id, origin: spec.origin || "derived in-repo from declared base hues", base_hues: spec.base_hues || null, ramps: spec.ramps, single: spec.single });
     return { ok: true, palette: pal, problems, size: pal.size };
   }
   palette_get(id) { return this.palettes.get(id) || null; }
@@ -234,7 +235,7 @@ class Project {
     if (!coord.ok) return { ok: false, errors: coord.errors, warnings: coord.warnings, bible: null };
     const doc = { id, ...bible, signature: bible.signature || "", frozen: false, derived_from: bible.derived_from || "declared base hues", created: new Date().toISOString() };
     this.styles.set(id, doc);
-    writeJSON(path.join(artRoot(this.root), "styles", `${id}.json`), doc);
+    writeJSON(storage.within(this.root, "art", "styles", `${id}.json`), doc);
     return { ok: true, bible: doc, warnings: coord.warnings };
   }
   style_get(id) { return this.styles.get(id) || null; }
@@ -243,7 +244,7 @@ class Project {
     const s = this.styles.get(id);
     if (!s) return { ok: false, reason: `no style '${id}'` };
     s.frozen = true;
-    writeJSON(path.join(artRoot(this.root), "styles", `${id}.json`), s);
+    writeJSON(storage.within(this.root, "art", "styles", `${id}.json`), s);
     return { ok: true, id, frozen: true };
   }
   /** Amending a frozen bible is allowed but triggers a regression run, never a silent edit. */
@@ -254,7 +255,7 @@ class Project {
     const coord = validateCoordinate(next);
     if (!coord.ok) return { ok: false, errors: coord.errors };
     this.styles.set(id, next);
-    writeJSON(path.join(artRoot(this.root), "styles", `${id}.json`), next);
+    writeJSON(storage.within(this.root, "art", "styles", `${id}.json`), next);
     return { ok: true, bible: next, must_rerun: "regression_check", warnings: coord.warnings };
   }
 
@@ -281,7 +282,7 @@ class Project {
       provenance: this.provenanceFor(id),
     };
     this.sprites.set(id, doc);
-    const dir = ensure(path.join(artRoot(this.root), "sprites", id));
+    const dir = ensure(storage.within(this.root, "art", "sprites", id));
     writeJSON(path.join(dir, "sprite.json"), doc);
     ensure(path.join(dir, "cels"));
     return { ok: true, sprite: doc, path: dir };
@@ -289,7 +290,7 @@ class Project {
   sprite_info(id) { return this.sprites.get(id) || null; }
   sprite_delete(id) {
     this.sprites.delete(id);
-    const dir = path.join(artRoot(this.root), "sprites", id);
+    const dir = storage.within(this.root, "art", "sprites", id);
     if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
     return { ok: true, id };
   }
@@ -325,17 +326,18 @@ class Project {
     return this.saveSprite(s) && { ok: true, from: old, to: s.canvas };
   }
 
-  saveSprite(s) { writeJSON(path.join(artRoot(this.root), "sprites", s.id, "sprite.json"), s); return s; }
+  saveSprite(s) { writeJSON(storage.within(this.root, "art", "sprites", s.id, "sprite.json"), s); return s; }
 
   celKey(clip, direction, frame) { return `${clip}/${direction}/f${frame}`; }
 
   writeCel(spriteId, key, cel) {
     const s = this.sprites.get(spriteId);
     if (!s) { const e = new Error(`no sprite '${spriteId}'`); e.rule = "no_sprite"; throw e; };
-    const file = `cels/${key.replace(/\//g, "-")}.grid`;
-    const abs = path.join(artRoot(this.root), "sprites", spriteId, file);
+    storage.within(this.root, "art", "sprites", spriteId, key);
+    const file = s.cels[key] || `cels/${encodeURIComponent(key)}.grid`;
+    const abs = storage.within(this.root, "art", "sprites", spriteId, file);
     ensure(path.dirname(abs));
-    fs.writeFileSync(abs, cel.toGrid());
+    storage.atomicWrite(abs, cel.toGrid());
     s.cels[key] = file;
     s.provenance = this.provenanceFor(spriteId);
     this.saveSprite(s);
@@ -344,7 +346,7 @@ class Project {
   readCel(spriteId, key) {
     const s = this.sprites.get(spriteId);
     if (!s || !s.cels[key]) return null;
-    const abs = path.join(artRoot(this.root), "sprites", spriteId, s.cels[key]);
+    const abs = storage.within(this.root, "art", "sprites", spriteId, s.cels[key]);
     if (!fs.existsSync(abs)) return null;
     return Cel.fromGrid(fs.readFileSync(abs, "utf8"), s.palette);
   }
@@ -356,12 +358,12 @@ class Project {
     h.push(entry);
     // The history has to survive the process that made it, or "provenance is computed from edit
     // history" quietly becomes "provenance is whatever the last session remembered".
-    fs.appendFileSync(path.join(artRoot(this.root), "history.jsonl"), JSON.stringify({ cel: celId, ...entry }) + "\n");
+    fs.appendFileSync(storage.within(this.root, "art", "history.jsonl"), JSON.stringify({ cel: celId, ...entry }) + "\n");
     return h.length;
   }
 
   loadHistory() {
-    const f = path.join(artRoot(this.root), "history.jsonl");
+    const f = storage.within(this.root, "art", "history.jsonl");
     if (!fs.existsSync(f)) return 0;
     let n = 0;
     for (const line of fs.readFileSync(f, "utf8").split("\n")) {
@@ -432,9 +434,9 @@ class Project {
     }
     cel.meta = { ...cel.meta, imported: true, provenance: prov };
     // Quarantine: the file lands in art/quarantine/, never in the asset tree.
-    const q = ensure(path.join(artRoot(this.root), "quarantine"));
-    const qfile = path.join(q, `${cel.name}.grid`);
-    fs.writeFileSync(qfile, cel.toGrid());
+    const q = ensure(storage.within(this.root, "art", "quarantine"));
+    const qfile = storage.within(q, `${cel.name}.grid`);
+    storage.atomicWrite(qfile, cel.toGrid());
     this.record(cel.name, "import_png", cel.bbox()?.area ?? 0, true);
     return { ok: true, cel, quarantined: qfile, worst_delta: +worst.toFixed(1),
       violations: [{ rule: "imported_pixels", severity: "warn", message: `${cel.bbox()?.area ?? 0} pixel(s) imported from ${spec.path} (${prov.origin}). Quarantined. export_sheet will refuse to include this cel unless allow_imported: true, and assert_style reports it as a finding, not a pass.` }],

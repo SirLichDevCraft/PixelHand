@@ -1,5 +1,8 @@
 # 10 — Honest assessment: what can this engine do well?
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 **Short answer: the architecture is the right shape, and the vision loop is the correct core. But as originally written this plan would not reach a strong craft bar, because it optimises infrastructure and treats the drawing as if it would just happen. I tested that assumption directly and it failed — informatively.**
 
 Confidence, stated as numbers rather than mood:

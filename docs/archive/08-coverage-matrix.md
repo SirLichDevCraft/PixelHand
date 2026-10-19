@@ -1,5 +1,8 @@
 # 08 — The coverage matrix: the engine owns the space, a game is a point in it
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 The design axis is not "which game". It is a **parameter space**, and the engine must be able to produce credible, internally consistent art anywhere in it. A project picks a coordinate; the engine validates that the coordinate is even possible, then enforces it.
 
 **Diversity is a specifiable thing.** Below are the axes, their value domains, the interactions the engine must know, the asset classes that must be covered, and the acceptance tests that prove coverage rather than assert it.

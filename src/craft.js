@@ -487,6 +487,7 @@ function craftScore(cel, palette, opts = {}) {
     .map(([k, v]) => `${k} ${Math.round(v * 100)}`);
   return {
     score: +total.toFixed(3), grade: total >= 0.85 ? "hero" : total >= 0.72 ? "support" : total >= 0.58 ? "background" : "reject",
+    assessment: "heuristic-diagnostic", visual_approval: "unreviewed",
     sub: Object.fromEntries(Object.entries(sub).map(([k, v]) => [k, +(v ?? 0).toFixed(3)])),
     weakest: weak,
     detail: { form, light, value, blob, outline, ground, focal, shape, space, separation: sep, clusters },

@@ -1,5 +1,8 @@
 # 04 — The vision loop: how I actually see the art
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 This is the heart of the engine. Everything else is support for this loop:
 
 ```
@@ -114,7 +117,7 @@ Verified today: engine writes a PNG → `read` → I see it. That path works and
 
 Not yet verified on this machine: whether a `direct`-exposure MCP tool's image content block reaches me as an image. Phase 1's first task is a 60-line spike to settle it.
 
-- If yes → `view` returns image + grid + audit in one round trip. Best case, and the round-trip savings in `docs/01-architecture.md` apply.
+- If yes → `view` returns image + grid + audit in one round trip. Best case, and the round-trip savings in `docs/archive/01-architecture.md` apply.
 - If no → `view` returns grid + audit + a file path, and `read` supplies the image. Two calls instead of one. The engine, the formats and the workflow are unchanged.
 
 Either way the loop closes. That is deliberate: the design must not hinge on an untested transport.

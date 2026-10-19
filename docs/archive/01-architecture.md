@@ -1,5 +1,8 @@
 # 01 — Architecture, data model, tool surface
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 ## 1. Layout
 
 ```
@@ -150,7 +153,7 @@ The hot loop is not draw→audit→draw. It is **propose → you react → recor
 `cel_copy` · `cel_offset` (per part, foot baseline locked) · `cel_link` (share a cel across frames to save work) · `cel_set_opacity` · `undo` / `redo` · `snapshot` / `restore`
 
 ### Animation
-See `docs/03-animation.md` for the semantics.
+See `docs/archive/03-animation.md` for the semantics.
 `rig_create` · `pose_define` · `skin_pose` · `clip_create` · `clip_set_frames` · `timing_apply` · `direction_derive` · `loop_validate` · `smear_frame` · `hit_flash` · `impact_squash` · `event_add` · `clip_info` · `clip_list`
 
 ### Tiles, structures and parts — the volume problem (`docs/06`)
@@ -163,7 +166,7 @@ See `docs/03-animation.md` for the semantics.
 `coverage_report` (docs/08: which capability has been exercised on real art) · `tools_list` · `session_stats` (renders used, authored pixels, tool calls) · `provenance` (computed from edit history, never asserted)
 
 ### Seeing — the heart
-See `docs/04-vision-loop.md` for the full spec of each mode.
+See `docs/archive/04-vision-loop.md` for the full spec of each mode.
 `view` ★ · `chunk` ★ · `contact_sheet` ★ · `contact_grid` ★ · `onion` ★ · `play` ★ · `silhouette` ★ · `squint` ★ · `value_map` ★ · `game_scale` ★ · `diff` ★ · `heatmap` ★
 
 `view` is the workhorse and always returns **three things together**: the image, the coordinate-addressed text grid, and the audit/metrics. Never one without the others.
@@ -172,7 +175,7 @@ See `docs/04-vision-loop.md` for the full spec of each mode.
 ★ `audit` (`sprite, cel?, rules?` → violations, each with coordinates **and the name of the tool that fixes it**) · `assert_style` · `regression_check`
 
 ### Import / export
-`import_png` (`path, quantize_to_palette, provenance` — **required**, and the result is quarantined; see `docs/07-provenance.md`) · `export_sheet` (`sprite, layout: rows=direction cols=frame, out`) · `export_manifest` (`engine: godot|phaser|tiled|aseprite|generic`) · `export_gif` · `export_indexed_png` · `export_tileset` · `export_harness`
+`import_png` (`path, quantize_to_palette, provenance` — **required**, and the result is quarantined; see `docs/archive/07-provenance.md`) · `export_sheet` (`sprite, layout: rows=direction cols=frame, out`) · `export_manifest` (`engine: godot|phaser|tiled|aseprite|generic`) · `export_gif` · `export_indexed_png` · `export_tileset` · `export_harness`
 
 `export_gate` sits in front of all of them: a clip that fails `loop_validate` or `assert_style` cannot be exported. That gate is the point of having an engine at all — it is what stops a long project from shipping its own drift.
 
@@ -243,4 +246,4 @@ Two different things are being configured here, and conflating them is how a too
 
 The authoring pair is deliberately **not** direct. `get_pixel_map` and `draw_pixel_map` return text, text is cheap, and a script should apply two hundred edits and report only the summary. Making them direct would spend the context budget on the thing that costs least.
 
-**The spike was built** (`src/spike-mcp.js`, 95 lines) and the engine does not depend on its outcome. What is still unverified on this machine is one specific link: whether a `direct` MCP tool's `image` content block reaches the model as an image. The `read`-a-generated-PNG path **is** verified, and every render tool writes its PNG to disk for exactly that reason. If the direct link fails, MCP carries grid + audit and the image comes from `read`; nothing else in the engine changes.
+**The spike was built** (`probe/spike-mcp.js`, 95 lines) and the engine does not depend on its outcome. What is still unverified on this machine is one specific link: whether a `direct` MCP tool's `image` content block reaches the model as an image. The `read`-a-generated-PNG path **is** verified, and every render tool writes its PNG to disk for exactly that reason. If the direct link fails, MCP carries grid + audit and the image comes from `read`; nothing else in the engine changes.

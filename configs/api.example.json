@@ -1,0 +1,11 @@
+{
+  "provider": "chat-completions",
+  "base_url": "https://YOUR_PROVIDER/v1",
+  "api_key_env": "PIXELHAND_API_KEY",
+  "model": "REPLACE_WITH_MODEL_NAME",
+  "vision": true,
+  "toolset": "core",
+  "timeout_ms": 60000,
+  "max_output_tokens": 2048,
+  "limits": { "rounds": 40, "calls": 100, "tokens": 100000, "elapsed_ms": 900000 }
+}

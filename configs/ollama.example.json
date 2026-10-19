@@ -1,0 +1,11 @@
+{
+  "provider": "ollama",
+  "base_url": "http://127.0.0.1:11434",
+  "model": "REPLACE_WITH_INSTALLED_MODEL",
+  "local_only": true,
+  "vision": false,
+  "toolset": "core",
+  "timeout_ms": 60000,
+  "max_output_tokens": 2048,
+  "limits": { "rounds": 40, "calls": 100, "tokens": 100000, "elapsed_ms": 900000 }
+}

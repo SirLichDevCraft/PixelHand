@@ -1,5 +1,8 @@
 # 06 — Environments: tiles, props, scenes
 
+> Historical design notes. Proposals and status claims may be superseded. See the [current guide](../guide.md), [roadmap](../../PLAN.md), and [asset policy](../provenance.md).
+
+
 Characters get all the attention, but a game is mostly ground, walls and props — and tiles fail in ways sprites do not.
 
 ## 1. Tileset construction
