@@ -3,8 +3,13 @@ out/
 *.log
 .DS_Store
 .serena/
+.pixelhand/
 .env
 .env.*
 !.env.example
 *.pem
 *.key
+*.tgz
+configs/local.json
+configs/api.json
+configs/*.local.json

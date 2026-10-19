@@ -1,16 +1,27 @@
 {
   "name": "pixelhand",
-  "version": "0.1.0",
+  "version": "0.2.0-rc.1",
   "description": "An engine for hand-placed 2D pixel art, directed by an LLM. Palette-indexed cels, ramp discipline, deterministic audit, vision loop.",
   "type": "commonjs",
   "private": true,
-  "engines": { "node": ">=20" },
+  "main": "src/index.js",
+  "files": ["src/", "tools/run-agent.js", "tools/evaluate.js", "examples/", "configs/*.example.json", "evaluation/briefs.json", "docs/", "README.md", "PRODUCTION.md", "CHANGELOG.md"],
+  "repository": { "type": "git", "url": "git+https://github.com/SirLichDevCraft/PixelHand.git" },
+  "engines": { "node": ">=20.3.0" },
   "dependencies": {},
   "bin": {
-    "pixelhand": "src/cli.js"
+    "pixelhand": "src/cli.js",
+    "pixelhand-agent": "tools/run-agent.js",
+    "pixelhand-evaluate": "tools/evaluate.js"
   },
   "scripts": {
-    "test": "node test/smoke.test.js && node test/integration.test.js",
+    "test": "node test/smoke.test.js && node test/integration.test.js && node --test test/production.test.js",
+    "test:production": "node --test test/production.test.js",
+    "agent": "node tools/run-agent.js",
+    "evaluate": "node tools/evaluate.js",
+    "demo": "node examples/lantern.js",
+    "release:check": "node tools/release-check.js",
+    "check": "node tools/release-check.js --engineering",
     "test:smoke": "node test/smoke.test.js",
     "test:integration": "node test/integration.test.js",
     "bench": "node bench/benchmark.js",

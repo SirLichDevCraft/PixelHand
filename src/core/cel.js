@@ -19,7 +19,7 @@ const indexFor = (ch) => (ch === "." ? TRANSPARENT : CHAR_TO_INDEX.has(ch) ? CHA
 
 class Cel {
   constructor(w, h, paletteId = "none", name = "cel") {
-    if (!Number.isInteger(w) || !Number.isInteger(h) || w < 1 || h < 1) throw new Error(`bad cel size ${w}x${h}`);
+    if (!Number.isInteger(w) || !Number.isInteger(h) || w < 1 || h < 1 || w > 2048 || h > 2048) throw new Error(`bad cel size ${w}x${h}; maximum is 2048 per axis`);
     this.w = w; this.h = h;
     this.paletteId = paletteId;
     this.name = name;
@@ -28,7 +28,7 @@ class Cel {
     this.meta = {};            // rig tags, event markers, provenance
   }
 
-  inBounds(x, y) { return x >= 0 && y >= 0 && x < this.w && y < this.h; }
+  inBounds(x, y) { return Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < this.w && y < this.h; }
   /** Out-of-bounds reads return TRANSPARENT, never null: a null silently defeats `v < 0` guards. */
   get(x, y) { return this.inBounds(x, y) ? this.idx[y * this.w + x] : TRANSPARENT; }
 

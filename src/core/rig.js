@@ -5,6 +5,7 @@
 "use strict";
 
 const { Cel, TRANSPARENT } = require("./cel.js");
+const { bonePixels } = require("./bone-raster.js");
 
 const PALETTES = new Map();
 function registerPalette(p) { PALETTES.set(p.id, p); return p; }
@@ -235,6 +236,7 @@ class Skin {
       const mo = p.anchorOffset ? [-p.anchorOffset[0] - p.cel.w + 1, p.anchorOffset[1]] : p.anchorOffset;
       this.add(target, {
         ...p, cel: mc, anchorOffset: mo, anchorX: p.cel.w - 1 - p.anchorX,
+        ...(p.bindVector ? {bindVector:[-p.bindVector[0],p.bindVector[1]]} : {}),
         flip: !p.flip, derivedFrom: `${source}/${p.name}`,
       });
     }
@@ -270,6 +272,9 @@ class Pose {
     this.weight = spec.weight ?? 0;
     this.offset = spec.offset || [0, 0];
     this.note = spec.note || "";
+    this.joints = spec.joints || {};
+    this.skeleton = spec.skeleton || null;
+    this.zOrder = spec.zOrder || null;
   }
   /** Modifiers for a facing, merged over the base pose per part. */
   modFor(partName, direction) {
@@ -301,10 +306,22 @@ function projectGait(gait, direction, partName, defaultStride = 2) {
 function compose(skin, rig, pose, direction, opts = {}) {
   const w = opts.w ?? rig.canvas[0], h = opts.h ?? rig.canvas[1];
   const cel = new Cel(w, h, skin.paletteId, opts.name || `${pose.name}.${direction}`);
-  const order = rig.zOrder[direction] || rig.zOrder.default;
+  let order = pose.zOrder?.[direction] || rig.zOrder[direction] || rig.zOrder.default;
   if (!order) { const e = new Error(`rig has no z-order for direction '${direction}'`); e.rule = "rig_incomplete"; throw e; };
-  const anchors = rig.anchors[direction];
+  const baseAnchors = rig.anchors[direction];
+  const anchors = baseAnchors ? { ...baseAnchors, ...pose.joints?.[direction] } : null;
   if (!anchors) { const e = new Error(`rig has no anchors for direction '${direction}'`); e.rule = "rig_incomplete"; throw e; };
+  if (pose.skeleton?.depth?.[direction] && !pose.zOrder?.[direction]) {
+    const depth = pose.skeleton.depth[direction];
+    order = [...order].sort((a,b) => {
+      const jointA = skin.get(direction,a,pose.partPoses[a] || pose.name)?.anchorJoint;
+      const jointB = skin.get(direction,b,pose.partPoses[b] || pose.name)?.anchorJoint;
+      const partA=skin.get(direction,a,pose.partPoses[a] || pose.name),partB=skin.get(direction,b,pose.partPoses[b] || pose.name);
+      const zA=((depth[jointA] ?? 0)+(depth[partA?.endJoint] ?? depth[jointA] ?? 0))/2;
+      const zB=((depth[jointB] ?? 0)+(depth[partB?.endJoint] ?? depth[jointB] ?? 0))/2;
+      return zA-zB;
+    });
+  }
 
   const placed = [];
   const compositionParts = [];
@@ -324,23 +341,17 @@ function compose(skin, rig, pose, direction, opts = {}) {
     const dx = (mod.dx ?? 0) + gait.dx + (part.flip ? -1 : 1) * (pose.lean || 0) * (part.leanFactor ?? 0);
     const dy = (mod.dy ?? 0) + gait.dy + (part.bobFactor ? Math.round(pose.headBob * part.bobFactor) : 0);
     const gaitMode = rig.gaitParts?.[partName] || null;
+    const boneEnd=part.endJoint?anchors[part.endJoint]:null;
+    if(part.endJoint&&!boneEnd)throw Object.assign(new Error(`Missing end joint '${part.endJoint}'`),{rule:"rig_incomplete"});
     compositionParts.push({ name: partName, source: part.cel.name, poseVariant: part.pose || null,
-      signature: `${celSignature(part.cel)}${gaitMode && (gait.dx || gait.dy) ? `@${gaitMode}:${gait.dx},${gait.dy}` : ""}`,
+      signature: `${celSignature(part.cel)}${boneEnd?`@bone:${boneEnd[0]-joint[0]},${boneEnd[1]-joint[1]}`:""}${gaitMode && (gait.dx || gait.dy) ? `@${gaitMode}:${gait.dx},${gait.dy}` : ""}`,
       at: [baseX + dx, baseY + dy], gait: gaitMode ? [gait.dx, gait.dy] : null, hidden: false });
     const out = new Cel(part.cel.w, part.cel.h, skin.paletteId, part.cel.name);
     out.idx = Int16Array.from(part.cel.idx);
     const hingeY = joint[1] - baseY;
     const distalSpan = Math.max(1, out.h - 1 - hingeY);
-    for (let sy = 0; sy < out.h; sy++) for (let sx = 0; sx < out.w; sx++) {
-      const v = out.idx[sy * out.w + sx];
-      if (v === TRANSPARENT) continue;
-      // Keep the root of a limb on its skeleton joint. The foot/hand takes the full
-      // projected stride; pixels between hinge and tip ease into that displacement.
-      const t = gaitMode === "hinged" ? Math.max(0, Math.min(1, (sy - hingeY) / distalSpan)) : 0;
-      const gx = gaitMode === "held" ? gait.dx : gaitMode === "hinged" ? Math.round(gait.dx * t) : 0;
-      const gy = gaitMode === "held" ? gait.dy : gaitMode === "hinged" ? Math.round(gait.dy * t) : 0;
-      const px = baseX + dx + sx + gx, py = baseY + dy + sy + gy;
-      if (!cel.inBounds(px, py)) continue;
+    const placePixel=(px,py,v)=>{
+      if (!cel.inBounds(px, py)) return;
       const prev = owner.get(py * cel.w + px);
       if (prev !== undefined && classOf(prev) === classOf(partName) && prev !== partName) {
         // Overlap between two limbs of the same kind is NORMAL in a side view - the near leg
@@ -354,6 +365,16 @@ function compose(skin, rig, pose, direction, opts = {}) {
       }
       owner.set(py * cel.w + px, partName);
       cel.set(px, py, v);
+    };
+    if(boneEnd){
+      for(const pixel of bonePixels(part,[joint[0]+dx,joint[1]+dy],[boneEnd[0]+dx,boneEnd[1]+dy],[w,h]))placePixel(pixel.x,pixel.y,pixel.index);
+    } else for (let sy = 0; sy < out.h; sy++) for (let sx = 0; sx < out.w; sx++) {
+      const v = out.idx[sy * out.w + sx];
+      if (v === TRANSPARENT) continue;
+      const t = gaitMode === "hinged" ? Math.max(0, Math.min(1, (sy - hingeY) / distalSpan)) : 0;
+      const gx = gaitMode === "held" ? gait.dx : gaitMode === "hinged" ? Math.round(gait.dx * t) : 0;
+      const gy = gaitMode === "held" ? gait.dy : gaitMode === "hinged" ? Math.round(gait.dy * t) : 0;
+      placePixel(baseX+dx+sx+gx,baseY+dy+sy+gy,v);
     }
     placed.push({ partName, at: [baseX + dx, baseY + dy] });
   }
@@ -367,6 +388,7 @@ function compose(skin, rig, pose, direction, opts = {}) {
   cel.meta = { label: opts.label || `${pose.name}`, note: opts.note || pose.note, pose: pose.name, direction,
     gait: pose.gait ? { ...pose.gait, heading: direction } : null,
     placed: placed.map(p => p.partName), collisions, compositionParts,
+    ...(pose.skeleton ? { skeleton: pose.skeleton } : {}),
     mirroredFacing: derived.length > 0, mirroredFrom: derived[0] || null };
   return cel;
 }
@@ -512,6 +534,14 @@ function loopValidate(frames, opts = {}) {
     }
   }
 
+  if (frames.some(f => f.cel.meta?.skeleton)) {
+    if (frames.some(f => !f.cel.meta?.skeleton)) problems.push("Only some frames carry solved skeleton contacts");
+    else {
+      const contact = require("./skeleton.js").contactReport(frames.map(f => f.cel.meta.skeleton));
+      info.contacts = contact;
+      if (!contact.ok) problems.push(contact.measured_contacts ? "Planted feet drift or leave the ground plane" : "Skeleton clip has no declared planted contacts");
+    }
+  }
   return { ok: problems.length === 0, problems, info };
 }
 

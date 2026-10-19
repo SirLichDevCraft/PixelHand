@@ -6,6 +6,7 @@ const { components, silhouetteOf } = require("./core/style.js");
 const craft = require("./craft.js");
 
 const RULES = [];
+const HARD_RULES = new Set(["unauthorised_colour", "palette_magnitude", "region_out_of_bounds", "empty_cel", "audit_rule_failed"]);
 const rule = (id, severity, describe) => RULES.push({ id, severity, describe });
 
 // A finding that only says "wrong" costs a round trip. A finding that says which pixel and
@@ -275,6 +276,7 @@ rule("bbox_jitter", "warn", (cel, ctx) => {
 // A cel can pass every rule above and still be a flat, unlit, ungrounded blob.
 
 rule("flat_mass", "error", (cel, ctx) => {
+  if (ctx.style?.shading === "flat" || ctx.style?.shading === "unlit") return null;
   const f = craft.formModelling(cel, ctx.palette);
   if (!f.flat.length) return null;
   return { count: f.flat.length, at: f.flat.map(x => ({ material: x.material, area: x.area, stepsUsed: x.stepsUsed, available: x.available, at: x.at[0] })),
@@ -425,17 +427,22 @@ rule("edges_do_not_converge", "error", (cel, ctx) => {
 
 function audit(cel, ctx = {}) {
   const findings = [];
+  const policy = ctx.style?.audit_policy || {};
   for (const r of RULES) {
     let f = null;
-    try { f = r.describe(cel, ctx); } catch (e) { f = { message: `rule crashed: ${e.message}` }; }
+    try { f = r.describe(cel, ctx); } catch (e) { findings.push({ rule: "audit_rule_failed", severity: "error", category: "mechanical", message: `${r.id}: ${e.message}` }); continue; }
     if (!f) continue;
-    const severity = f.severity_override || r.severity;
-    findings.push({ rule: r.id, severity, ...f });
+    const setting = policy[r.id];
+    if (setting && !["error", "warn", "off"].includes(setting)) { findings.push({ rule: "audit_rule_failed", severity: "error", category: "mechanical", message: `Invalid policy for ${r.id}` }); continue; }
+    if (setting === "off" && !HARD_RULES.has(r.id)) continue;
+    const severity = HARD_RULES.has(r.id) ? "error" : setting || f.severity_override || r.severity;
+    findings.push({ rule: r.id, ...f, severity, category: HARD_RULES.has(r.id) ? "mechanical" : "style" });
   }
   const craft_ = ctx.palette ? craft.craftScore(cel, ctx.palette, ctx) : null;
   const errors = findings.filter(f => f.severity === "error").length;
   const warns = findings.filter(f => f.severity === "warn").length;
-  return { ok: errors === 0, errors, warns, findings, craft: craft_,
+  const hardErrors = findings.filter(f => f.category === "mechanical" && f.severity === "error");
+  return { ok: errors === 0, errors, warns, findings, craft: craft_, mechanical: { ok: hardErrors.length === 0, errors: hardErrors.length, findings: hardErrors },
     summary: `${cel.name}: ${errors} error / ${warns} warn` + (craft_ ? ` | craft ${craft_.score} (${craft_.grade}) weakest: ${craft_.weakest.join(", ")}` : "") };
 }
 

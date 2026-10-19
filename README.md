@@ -4,7 +4,7 @@
 
 **A hand-placed 2D pixel-art engine directed through tools and MCP.** PixelHand keeps sprites as palette-indexed pixels and editable text grids, then helps an artist or agent render, inspect, audit and refine them at native game scale.
 
-It is an experimental engine, not a claim that AI can replace an art director. The strongest results come from a clear design brief, authored pixels, visual review and iteration.
+The strongest results come from a clear design brief, authored pixels, visual review and iteration. The current release candidate adds durable workflows and local/API model execution; [production release gates](PRODUCTION.md) track qualification.
 
 ## Showcases
 
@@ -44,6 +44,8 @@ node bench/showcase-hero.js
 
 The showcase command writes its previews under `showcase/hero/preview/`.
 
+For installation, compact model toolsets, recovery, skeleton authoring, local/API inference, and live quality evaluation, see the [production workflow guide](docs/12-production.md).
+
 ## MCP
 
 Run the stdio server from the repository:
@@ -70,7 +72,7 @@ Use `project_open` with the root of an existing PixelHand game project before ed
 
 ## Project status
 
-PixelHand is under active development. Its plan records completed gates, open coverage work, known limitations and evaluation criteria in [`PLAN.md`](PLAN.md). The current showcase is evidence of the engine workflow, not a guarantee that every generated asset will meet the same quality without review.
+PixelHand 0.2 is a release candidate. [`PRODUCTION.md`](PRODUCTION.md) tracks engineering and live model qualification separately. [`PLAN.md`](PLAN.md) retains the original development evidence and coverage work. Showcases demonstrate the authored workflow; model quality is evaluated on independent briefs with explicit visual review.
 
 ## License
 

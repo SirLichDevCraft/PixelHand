@@ -50,6 +50,8 @@ const FONT = {
 
 class Raster {
   constructor(w, h, bg = [22, 22, 28]) {
+    if (!Number.isInteger(w) || !Number.isInteger(h) || w < 1 || h < 1 || w * h > 32 * 1024 * 1024)
+      throw Object.assign(new Error("Render exceeds the 32-megapixel review budget; use chunk or fewer frames"), { rule: "render_budget" });
     this.w = w; this.h = h;
     this.rgb = Buffer.alloc(w * h * 3);
     this.fill(bg);
@@ -180,10 +182,13 @@ function renderCel(cel, palette, opts = {}) {
   const oy = 5 * ls + 10;
   const used = [...cel.counts().entries()].sort((a, b) => a[0] - b[0]);
   const legendRows = palette && opts.legend !== false ? used.length : 0;
-  const legendH = legendRows ? (5 * ls + 10) + legendRows * (4 * ls + 2) : 0;
+  const legendRowH = 5 * ls + 4;
+  const legendLine = (i,n) => { const e=palette.entries[i]; return `${charFor(i)} [${i}] ${e.name.length>32?e.name.slice(0,30)+"..":e.name} ${hex(e.rgb)} x${n}`; };
+  const legendH = legendRows ? (5 * ls + 14) + legendRows * legendRowH : 0;
+  const legendW = legendRows ? Math.max(...used.map(([i,n])=>legendLine(i,n).length*6*ls))+5*ls : 0;
 
-  const W = ox + cel.w * z + 12;
-  const H = oy + cel.h * z + legendH + 18;
+  const W = ox + Math.max(cel.w * z,legendW) + 12;
+  const H = oy + cel.h * z + legendH + 5 * ls + 18;
   const r = new Raster(W, H, PALETTE_BG);
 
   drawArt(r, cel, palette, ox, oy, z, mode);
@@ -210,8 +215,8 @@ function renderCel(cel, palette, opts = {}) {
       r.rect(ox, ly, 4 * ls, 4 * ls, e.rgb);
       r.rect(ox, ly, 4 * ls, 1, [0, 0, 0]);
       r.rect(ox, ly + 4 * ls - 1, 4 * ls, 1, [0, 0, 0]);
-      r.text(ox + 5 * ls, ly, charFor(i) + " idx " + i + " " + e.name + " " + hex(e.rgb) + (e.ramp ? " " + e.ramp + ":" + e.step : "") + " x" + n, DIM, ls);
-      ly += 4 * ls + 2;
+      r.text(ox + 5 * ls, ly, legendLine(i,n), DIM, ls);
+      ly += legendRowH;
     }
   }
   return { buffer: encodeRGB(r.w, r.h, r.rgb), raster: r, zoom: z };

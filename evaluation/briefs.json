@@ -1,0 +1,28 @@
+[
+  {
+    "id": "crooked-lantern",
+    "brief": "Author an original 16x16 stone lantern with a crooked roof, one readable glowing window, and a small chipped corner. Use an authored palette of at most 16 colours. Preserve a clear silhouette at native scale. Save a sprite, export an indexed PNG, and provide a review bundle. Record the brief and decisions in the asset workflow. Do not reuse existing showcase art.",
+    "minimum_sprites": 1,
+    "minimum_cels": 1
+  },
+  {
+    "id": "courier-turnaround",
+    "brief": "Design an original 24x32 courier with an oversized rolled map, a narrow hat, and one shoulder strap. Author front, back, left and right facings with consistent proportions and fixed scene lighting. Rear views must hide the face, and the map and strap must keep their identity across facings. Save four distinct facing cels in a sprite. Export a contact sheet and record a visual review. Do not reuse the existing characters in this repository.",
+    "minimum_sprites": 1,
+    "minimum_cels": 4
+  },
+  {
+    "id": "eight-facing-walk",
+    "brief": "Create an original 32x40 traveller with a short jacket and sturdy boots. Author an eight-direction walk with at least four distinct poses per direction, opposing arm motion and consistent identity and timing. Use constrained skeleton joints and planted ground contacts. Feet must remain planted through their stance phase while the body advances. Review every facing in a PNG frame strip and at actual playback speed. Save the clip and sprite, run animation validation, and export the sheet and GIFs. Leave human visual acceptance pending until a human reviews it.",
+    "minimum_sprites": 1,
+    "minimum_cels": 32,
+    "minimum_clip_directions": 8,
+    "minimum_frames_per_direction": 4
+  },
+  {
+    "id": "orchard-scene",
+    "brief": "Author an original small orchard scene using 16x16 ground tiles, a wooden crate, a bent tree and a well. Use one coherent palette with restrained ground texture and readable props. Demonstrate repeating tile seams and review the composition at native game scale, in silhouette and in values. Save the tile and prop sprites and export a scene review. Keep the authored pixels editable and do not reuse existing showcase assets.",
+    "minimum_sprites": 3,
+    "minimum_cels": 4
+  }
+]

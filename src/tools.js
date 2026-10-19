@@ -11,7 +11,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const { Cel, diff, rle, unrle } = require("./core/cel.js");
+const { Cel, diff, rle, unrle, charFor } = require("./core/cel.js");
 const { Palette, buildRamp, hex, parseHex, rgbToHsl } = require("./core/palette.js");
 const style = require("./core/style.js");
 const ops = require("./core/ops.js");
@@ -31,6 +31,7 @@ const render = require("./render.js");
 const { buildSheet, buildManifest, writeExport, previewGif } = require("./export.js");
 const { encodeGIF } = require("./codec/gif.js");
 const { decodePNG } = require("./codec/png.js");
+const storage = require("./core/storage.js");
 
 const ROOT = process.env.PIXELHAND_ROOT || path.join(__dirname, "..");
 const OUT = path.join(ROOT, "out");
@@ -57,9 +58,18 @@ class Workspace {
     this.renders = 0;
     this.calls = 0;
     this.authoredPixels = 0;
+    this.production = { assets: {}, masks: {}, skeletons: {} };
+    this.sessionRevision = 0;
+    this.recoveryWarnings = [];
   }
 
-  load(root = this.root) {
+  load(root = this.root, staged = false) {
+    if (!staged) {
+      const next = new Workspace(path.resolve(root));
+      next.load(next.root, true);
+      Object.assign(this, next);
+      return this.project;
+    }
     // Open first so a bad path leaves the currently loaded project and its warm state intact.
     const project = Project.open(root);
     this.root = root;
@@ -77,6 +87,9 @@ class Workspace {
     this.renders = 0;
     this.calls = 0;
     this.authoredPixels = 0;
+    this.production = { assets: {}, masks: {}, skeletons: {} };
+    this.sessionRevision = 0;
+    this.scenes = new Map(); this.parts = null; this.materials = null;
     // Warm state is a cache, not the record. On load the declared rigs and clips come back from
     // disk so a fresh process can resume an animation without re-declaring it.
     for (const [id, doc] of this.project.rigs) this.rigs.set(id, doc);
@@ -88,6 +101,8 @@ class Workspace {
         if (!cel) { missing++; continue; }
         const part = { name: p.name, pose: p.pose, cel, anchorX: p.anchor?.[0] ?? 0, anchorY: p.anchor?.[1] ?? 0 };
         if (p.joint !== undefined) part.anchorJoint = p.joint;
+        if (p.to_joint !== undefined) part.endJoint = p.to_joint;
+        if (p.bind !== undefined) part.bindVector = p.bind;
         if (p.offset !== undefined) part.anchorOffset = p.offset;
         if (p.lean !== undefined) part.leanFactor = p.lean;
         skin.add(p.direction, part);
@@ -115,6 +130,7 @@ class Workspace {
       c.incomplete = missing > 0 ? `${missing} frame cel(s) referenced by '${id}' are not on disk under sprite '${doc.sprite}'` : null;
       this.clips.set(id, c);
     }
+    require("./core/session.js").recover(this);
     return this.project;
   }
   needProject() {
@@ -144,7 +160,7 @@ class Workspace {
     if (this.cache.has(key) && fs.existsSync(this.cache.get(key)) && !opts.force) return { path: this.cache.get(key), cached: true };
     // Render names are allowed to be grouped ("depth.corner-house/base"), so the directory has to be
     // derived from the name instead of assumed to be one level deep.
-    const file = path.join(OUT, "inspect", `${name}.${h}.png`);
+    const file = storage.within(this.root, "out", "inspect", `${name}.${h}.png`);
     fs.mkdirSync(path.dirname(file), { recursive: true });
     fs.writeFileSync(file, buffer);
     this.cache.set(key, file);
@@ -230,8 +246,16 @@ function withUndo(id, fn) {
   const cel = W.store.get(id);
   if (!cel) return bad("no_cel", `withUndo needs a cel in warm state ('${id}')`);
   const before = cel.clone();
-  const res = fn() || {};
+  let res;
+  try { res = fn() || {}; }
+  catch (e) { W.store.put(id, before); throw e; }
+  if (res.ok === false) { W.store.put(id, before); return res; }
   const edits = diff(before, W.store.get(id));
+  const protectedPixels = new Set(Object.values(W.production?.masks || {}).filter(m => m.cel === id && m.protect).flatMap(m => m.pixels.map(([x,y]) => `${x},${y}`)));
+  if (edits.some(e => protectedPixels.has(`${e.x},${e.y}`))) {
+    W.store.put(id, before);
+    return bad("protected_pixels", "The edit touches a protected mask; unlock it explicitly with mask_protect first");
+  }
   if (edits.length) {
     (W.store.undo.get(id) || (W.store.undo.set(id, []), W.store.undo.get(id))).push(edits);
     (W.store.redo.get(id) || (W.store.redo.set(id, []), W.store.redo.get(id))).length = 0;
@@ -250,9 +274,9 @@ const tool = (name, describe, run) => { TOOLS[name] = { describe, run }; };
 // ---- project & style ----------------------------------------------------------
 
 tool("project_init", "Declare a project: a coordinate in the nine-axis space, frozen conventions.", (a) => {
-  const res = Project.init(a.root || W.root, a);
+  const res = Project.init(a.root || W.root, { ...a, game: a.game || a.id });
   if (!res.ok) return bad("coordinate_refused", res.errors.map(e => e.message).join(" | "));
-  W.project = res.project; W.root = a.root || W.root;
+  W.load(a.root || W.root);
   return ok({ project: res.id, conventions: res.conventions, warnings: res.warnings });
 });
 tool("project_open", "Open an existing PixelHand project from its root without overwriting it; safely switches the active workspace.", (a) => {
@@ -260,7 +284,7 @@ tool("project_open", "Open an existing PixelHand project from its root without o
   let project;
   try { project = W.load(a.root); }
   catch (e) { return bad("project_open_failed", `cannot open PixelHand project at '${a.root}': ${e.message}`); }
-  return ok({ project: project.doc.id, root: W.root, style: project.doc.style, canvas: project.doc.canvas, directions: project.doc.directions, fps: project.doc.fps });
+  return ok({ project: project.doc.id, root: W.root, style: project.doc.style, canvas: project.doc.canvas, directions: project.doc.directions, fps: project.doc.fps, warnings: W.recoveryWarnings || [] });
 });
 tool("style_list", "List declared style bibles.", () => ok({ styles: W.needProject().style_list() }));
 tool("style_load", "Load one bible.", (a) => ok({ bible: W.styleOf(a.id) }));
@@ -315,11 +339,12 @@ tool("sketch_analyse", "Measure a human sketch. Never a trace.", (a) => ok(W.nee
 
 // ---- palette & ramps ----------------------------------------------------------
 
-tool("palette_get", "A palette with roles and ramps.", (a) => { const p = W.palette(a.id); return ok({ palette: p.toManifest(), ramps: p.rampIds().map(r => ({ ramp: r, steps: p.ramp(r).map(i => p.entries[i].name) })) }); });
+tool("palette_get", "A palette with roles, ramps, and the exact grid character for each colour.", (a) => { const p = W.palette(a.id); return ok({ palette: p.toManifest(), legend: p.entries.map((e,i)=>({index:i,char:charFor(i),name:e.name})), ramps: p.rampIds().map(r => ({ ramp: r, steps: p.ramp(r).map(i => p.entries[i].name) })) }); });
 tool("palette_set", "Declare a palette from authored ramp recipes.", (a) => {
   const r = W.needProject().palette_set(a.id, a.colors ? { single: Object.fromEntries(a.colors.map((c, i) => [`c${i}`, { rgb: c, role: "general" }])) } : a.spec);
   if (!r.ok) return bad("palette_refused", r.problems.map(p => p.message).join(" | "));
-  return ok({ id: a.id, size: r.size, problems: r.problems });
+  const p = W.palette(a.id);
+  return ok({ id: a.id, size: r.size, problems: r.problems, legend:p.entries.map((e,i)=>({index:i,char:charFor(i),name:e.name})) });
 });
 tool("create_ramp", "Build a ramp from a recipe; reports distinct steps and warns when two collapse.", (a) => {
   const built = buildRamp(a);
@@ -354,7 +379,9 @@ tool("gradient_map", "Re-key existing art onto another palette's ramps. Pixel in
   const { cel } = celOf(a);
   const r = W.needProject().gradient_map(cel, a.from, a.to, a);
   if (!r.ok) return bad("gradient_map", r.reason);
-  W.store.put(a.cel, r.cel);
+  Object.assign(cel,r.cel);
+  W.store.put(a.cel, cel);
+  r.cel=cel;
   return r;
 });
 tool("palette_audit", "Palette discipline at a glance: usage counts, ramp ordering, problems.", (a) => {
@@ -397,7 +424,7 @@ tool("save_cel", "Write a cel to its grid file on disk.", (a) => {
 
 tool("get_pixel_map", "The read half of the core pair.", (a) => {
   const { cel } = celOf(a);
-  return ok({ ...ops.get_pixel_map(cel, { ...a, palette: paletteOfCel(cel) }), grid: render.gridText(cel) });
+  return ok({ ...ops.get_pixel_map(cel, { ...a, palette: paletteOfCel(cel) }), grid: render.gridText(cel), legend:render.legendText(paletteOfCel(cel)), hash: storage.hashCel(cel) });
 });
 tool("draw_pixel_map", "The write half. This is how art is authored: rows of palette-index characters.", (a) => {
   const { cel, id } = celOf(a);
@@ -504,7 +531,7 @@ tool("snapshot", "Freeze a cel state; undo history is reconstructible from snaps
 tool("restore", "Restore a snapshot.", (a) => ok(W.store.restore(a.key ?? a.snapshot)));
 tool("cel_list", "Every cel in warm state.", () => ok({ cels: W.store.ids() }));
 tool("cel_new", "Create an empty cel in warm state.", (a) => { W.store.put(a.cel, new Cel(a.w, a.h, a.palette, a.cel)); return ok({ cel: a.cel, canvas: [a.w, a.h] }); });
-tool("cel_from_grid", "Load a cel from grid text (the format a human can edit in any editor).", (a) => { W.store.put(a.cel, Cel.fromGrid(a.grid, a.palette)); return ok({ cel: a.cel }); });
+tool("cel_from_grid", "Load a cel from grid text (the format a human can edit in any editor).", (a) => { const cel=Cel.fromGrid(a.grid,a.palette);cel.name=a.cel;W.store.put(a.cel,cel);return ok({cel:a.cel}); });
 tool("cel_to_grid", "Read a cel as grid text.", (a) => { const { cel } = celOf(a); return ok({ grid: cel.toGrid(), labelled: render.gridText(cel) }); });
 
 // ---- animation ----------------------------------------------------------------
@@ -524,7 +551,7 @@ tool("skin_pose", "The step where the agent paints: the rig gives joint coordina
   if (!skin) return bad("no_skin", `no skin '${a.skin}'`);
   const rigDef = W.rigs.get(a.rig);
   const pose = (W.poses || new Map()).get(a.pose) || new rig.Pose(a.pose, a.spec || {});
-  const cel = rig.compose(skin, rigDef, pose, a.direction, { name: a.name || `${a.pose}.${a.direction}`, label: a.pose });
+  const cel = rig.compose(skin, rigDef, pose, a.direction, { name: a.name || `${a.skin}.${a.pose}.${a.direction}`, label: a.pose });
   W.store.put(a.name || `${a.skin}.${a.pose}.${a.direction}`, cel);
   const p = paletteOfCel(cel);
   const au = audit(cel, { palette: p, style: a.style ? W.styleOf(a.style) : null });
@@ -542,9 +569,12 @@ tool("clip_create", "Declare a clip from a template with its mandatory motion se
 tool("clip_set_frames", "Assign authored frames to a clip for one direction.", (a) => {
   const c = W.clips.get(a.clip);
   if (!c) return bad("no_clip", `no clip '${a.clip}'`);
+  if (!c.directions.includes(a.direction)) return bad("undeclared_direction", `Direction '${a.direction}' was not declared by '${a.clip}'`);
+  if (a.sprite && !W.project?.sprites.has(a.sprite)) return bad("no_sprite", `No sprite '${a.sprite}'`);
+  const resolved=a.frames.map(f=>{try{return typeof f.cel === "string"?celOf({cel:f.cel}).cel:f.cel;}catch{return null;}});
+  if (!resolved.length || resolved.some(cel=>!cel)) return bad("no_frames", "Every frame must reference an existing cel; the clip was not partially changed");
   const frames = a.frames.map((f, i) => {
-    const cel = typeof f.cel === "string" ? W.store.get(f.cel) : f.cel;
-    if (!cel) return null;
+    const cel = resolved[i];
     // The sheet is built from cel meta, so the clip/direction/pose/duration tags travel with the
     // authored pixels rather than being reconstructed at export time.
     cel.meta = { ...cel.meta, clip: a.clip, direction: a.direction, pose: f.pose ?? cel.meta.pose, frameIndex: i, duration: f.duration ?? null, events: f.events ?? cel.meta.events ?? [] };
@@ -592,7 +622,7 @@ tool("loop_validate", "The animation audit. A gate, not a report: a clip that fa
   let fails = 0;
   for (const d of c.directions) {
     const frames = c.frames(d);
-    if (!frames.length) continue;
+    if (!frames.length) { out[d] = { ok:false,problems:["Declared direction has no authored frames"] };fails++;continue; }
     const r = rig.loopValidate(frames, { requireCounterSwing: c.template === "walk", poses: a.poses });
     out[d] = { ok: r.ok, problems: r.problems, ...r.info };
     if (!r.ok) fails++;
@@ -651,6 +681,8 @@ tool("skin_define", "Declare base and pose-specific part cels per direction, eac
       const part = { name: p.name, cel, pose: p.pose,
         anchorX: p.anchor?.[0] ?? 0, anchorY: p.anchor?.[1] ?? 0 };
       if (p.joint !== undefined) part.anchorJoint = p.joint;
+      if (p.to_joint !== undefined) part.endJoint = p.to_joint;
+      if (p.bind !== undefined) part.bindVector = p.bind;
       if (p.offset !== undefined) part.anchorOffset = p.offset;
       if (p.lean !== undefined) part.leanFactor = p.lean;
       skin.add(p.direction, part);
@@ -659,6 +691,7 @@ tool("skin_define", "Declare base and pose-specific part cels per direction, eac
         pendingSaves.push({ celKey, cel });
         savedParts.push({ direction: p.direction, name: p.name, ...(p.pose ? { pose: p.pose } : {}), cel_key: celKey,
           ...(p.joint !== undefined ? { joint: p.joint } : {}), ...(p.offset !== undefined ? { offset: p.offset } : {}),
+          ...(p.to_joint !== undefined ? {to_joint:p.to_joint,bind:p.bind} : {}),
           ...(p.anchor ? { anchor: p.anchor } : {}), ...(p.lean !== undefined ? { lean: p.lean } : {}) });
       }
     } catch (e) { problems.push(`${p.direction}/${p.name}: ${e.message}`); }
@@ -687,7 +720,7 @@ const MODES = { view: "view", silhouette: "silhouette", value_map: "value_map", 
 tool("view", "The workhorse. Always returns image + coordinate-addressed grid + audit.", (a) => {
   const { cel } = celOf(a);
   const p = paletteOfCel(cel);
-  const r = render.renderCel(cel, p, { mode: MODES[a.mode] || "view", zoom: a.zoom, region: a.region });
+  const r = render.renderCel(cel, p, { mode: MODES[a.mode] || "view", zoom: a.zoom, region: a.region, legend:a.legend });
   return W.triple(cel, p, a.style, r, { name: a.name || `view.${cel.name}`, assetClass: a.asset_class, light: a.light, labelEvery: a.label_every });
 });
 tool("chunk", "A sub-region at high zoom. The context-budget lever.", (a) => {
@@ -726,24 +759,27 @@ tool("onion", "Current frame with neighbours ghosted warm/cool. Finds the one-pi
 tool("play", "An animated GIF at the clip's real fps. Timing faults are invisible in stills.", (a) => {
   const c = W.clips.get(a.clip);
   if (!c) return bad("no_clip", `no clip '${a.clip}'`);
-  const dirs = a.directions || [c.directions.find(d => c.frames(d).length)];
+  const dirs = a.directions || (a.direction ? [a.direction] : c.directions.filter(d => c.frames(d).length));
   const frames = dirs.flatMap(d => c.frames(d));
+  if (!frames.length) return bad("empty_clip", `Clip '${a.clip}' has no frames`);
   const p = W.palette(a.palette);
   const zoom = a.zoom ?? 8;
   const gif = adapters.export_gif(frames.map(f => f.cel), p, { zoom });
-  fs.mkdirSync(OUT, { recursive: true });
-  const file = path.join(OUT, `play.${a.clip}.gif`);
+  fs.mkdirSync(path.join(W.root, "out"), { recursive: true });
+  const file = storage.within(W.root, "out", `play.${a.clip}.gif`);
   fs.writeFileSync(file, gif);
   // One GIF per facing: a single strip of four facings played in sequence tells you nothing about
   // whether one facing's rhythm is wrong, because you never see the same facing twice.
   const perFacing = dirs.map(d => {
-    const f2 = path.join(OUT, `play.${a.clip}.${d}.gif`);
+    const f2 = storage.within(W.root, "out", `play.${a.clip}.${d}.gif`);
     fs.writeFileSync(f2, adapters.export_gif(c.frames(d).map(fr => fr.cel), p, { zoom }));
     return { direction: d, image: f2 };
   });
   const durations = dirs.map(d => ({ direction: d, durations: c.frames(d).map(f => f.duration) }));
   const uniform = durations.every(d => new Set(d.durations).size === 1);
-  return ok({ image: file, per_facing: perFacing, frames: frames.length, fps: c.fps, zoom, durations, placeholder_timing: uniform ? "every duration identical — there is no authored rhythm; timing_apply a curve" : null, note: "review timing AT PLAYBACK, never defaulted" });
+  const strip = render.multiSheet(dirs.map(d => ({ label: d, cels: c.frames(d).map((f, i) => { const cel = f.cel.clone(); cel.meta.label = `${i}: ${f.duration}ms`; return cel; }) })), p, { zoom: Math.min(zoom, 6), stamp: `${a.clip}: frame order and duration` });
+  const preview = W.saveRender(`play.${a.clip}.frames`, strip.buffer);
+  return ok({ image: file, preview_image: preview.path, per_facing: perFacing, frames: frames.length, fps: c.fps, zoom, durations, timing: uniform ? "uniform" : "authored-variable", note: "PNG strip exposes frame order; review rhythm at actual playback speed." });
 });
 tool("silhouette", "Everything flattened to two colours. The honest readability test.", (a) => {
   const { cel } = celOf(a);
@@ -841,22 +877,23 @@ tool("import_png", "Gated: provenance REQUIRED, result quarantined.", (a) => {
 });
 tool("export_sheet", "Rows = directions in the frozen declared order, columns = frames. Indexed PNG.", (a) => {
   const ids = a.clips || [...W.clips.keys()];
-  const gate = a.skip_gate ? { ok: true, summary: "gate skipped explicitly" } : regression.export_gate(Object.fromEntries(ids.map(k => [k, W.clips.get(k)]).filter(([, v]) => v)), W.styleOf(a.style), W.palette(a.palette), a);
+  const explicit = (a.cels || []).map(id => celOf({cel:id}).cel);
+  const gate = a.skip_gate ? { ok: true, summary: "gate skipped explicitly" } : explicit.length ? regression.static_gate(explicit, W.styleOf(a.style), W.palette(a.palette), a) : regression.export_gate(Object.fromEntries(ids.map(k => [k, W.clips.get(k)]).filter(([, v]) => v)), W.styleOf(a.style), W.palette(a.palette), a);
   if (!gate.ok) return { ...bad("export_refused", gate.summary, { fix: "fix the gate failures listed in gate" }), gate };
   const cels = [];
-  if (a.cels) for (const c of a.cels) cels.push(typeof c === "string" ? W.store.get(c) : c);
+  if (a.cels) cels.push(...explicit);
   else for (const k of ids) { const clip = W.clips.get(k); if (!clip) continue; for (const d of clip.directions) for (const f of clip.frames(d)) cels.push(f.cel); }
   if (!cels.length) return bad("no_cels", "nothing to export");
   const p = W.palette(a.palette);
   const sheet = buildSheet(cels, { cols: a.cols ?? cels.length, palette: p, pad: a.pad ?? 1, duration: a.duration });
   const manifest = buildManifest(sheet, W.styleOf(a.style), p, { imageName: a.image || "sheet.png", provenance: W.needProject().provenanceFor(a.sprite || ids[0] || "default"), directions: W.needProject().doc.directions || rig.DIRECTIONS });
-  const dir = a.out ? path.resolve(a.out) : path.join(OUT, "export");
+  const dir = a.out ? path.resolve(a.out) : storage.within(W.root, "out", "export");
   const written = writeExport(dir, sheet, manifest);
   const back = decodePNG(sheet.png);
   return ok({ dir, bytes: written.bytes, sheet: `${sheet.width}x${sheet.height}`, frames: sheet.celCount, palette_entries: sheet.palette.length, round_trip: `${back.w}x${back.h} colourType ${back.colorType} palette ${back.palette.length}`, gate: gate.summary });
 });
 tool("export_manifest", "Engine manifests: godot | phaser | tiled | unity | aseprite | html5-canvas | generic.", (a) => {
-  const dir = a.dir || path.join(OUT, "export");
+  const dir = a.dir || storage.within(W.root, "out", "export");
   const manifest = JSON.parse(fs.readFileSync(path.join(dir, "manifest.json"), "utf8"));
   const out = {};
   for (const t of a.targets || ["generic"]) { const r = adapters.adapt(manifest, t); out[t] = r.ok ? r.manifest : { error: r.reason }; }
@@ -869,29 +906,29 @@ tool("export_gif", "Animated preview; the palette travels with the frames, so th
   const cels = c ? c.frames(a.direction || c.directions.find(d => c.frames(d).length)).map(f => f.cel) : (a.cels || []).map(x => W.store.get(x));
   if (!cels.length) return bad("no_cels", "export_gif needs a clip with frames or an explicit cels list");
   const gif = adapters.export_gif(cels, W.palette(a.palette), a);
-  fs.mkdirSync(OUT, { recursive: true });
-  const file = path.join(OUT, `${a.name || "preview"}.gif`);
+  fs.mkdirSync(path.join(W.root, "out"), { recursive: true });
+  const file = storage.within(W.root, "out", `${a.name || "preview"}.gif`);
   fs.writeFileSync(file, gif);
   return ok({ file, bytes: gif.length, frames: cels.length });
 });
 tool("export_indexed_png", "One cel as an indexed PNG.", (a) => {
   const { cel } = celOf(a);
   const buf = adapters.export_indexed_png(cel, paletteOfCel(cel));
-  fs.mkdirSync(OUT, { recursive: true });
-  const file = path.join(OUT, `${a.name || cel.name}.png`);
+  fs.mkdirSync(path.join(W.root, "out"), { recursive: true });
+  const file = storage.within(W.root, "out", `${a.name || cel.name}.png`);
   fs.writeFileSync(file, buf);
   const back = decodePNG(buf);
   return ok({ file, bytes: buf.length, round_trip: `${back.w}x${back.h} colourType ${back.colorType} palette ${back.palette.length}` });
 });
 tool("export_tileset", "The 47-slot autotile sheet plus the bitmask bookkeeping.", (a) => {
   const r = adapters.export_tileset((a.tiles || []).map(t => ({ ...t, cel: typeof t.cel === "string" ? W.store.get(t.cel) : t.cel })), W.palette(a.palette), a);
-  fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(path.join(OUT, "tileset.png"), r.sheet.png);
-  fs.writeFileSync(path.join(OUT, "tileset.json"), JSON.stringify(r.index, null, 2));
+  fs.mkdirSync(path.join(W.root, "out"), { recursive: true });
+  fs.writeFileSync(storage.within(W.root, "out", "tileset.png"), r.sheet.png);
+  fs.writeFileSync(storage.within(W.root, "out", "tileset.json"), JSON.stringify(r.index, null, 2));
   return ok({ ok: r.ok, missing: r.missing, slots: r.index.length, sheet: `${r.sheet.width}x${r.sheet.height}`, bitmask: r.bitmask });
 });
 tool("export_harness", "A real 1x playtest scene in dependency-free HTML5 canvas.", (a) => {
-  const dir = a.dir || path.join(OUT, "export");
+  const dir = a.dir || storage.within(W.root, "out", "export");
   const manifest = JSON.parse(fs.readFileSync(path.join(dir, "manifest.json"), "utf8"));
   const sheet = { width: manifest.sheet.width, height: manifest.sheet.height, cellW: manifest.sheet.cellW, cellH: manifest.sheet.cellH, cols: manifest.sheet.cols };
   const html = sceneLib.playtest_harness(sheet, manifest, a);
@@ -1225,5 +1262,9 @@ tool("coverage_report", "docs/08 coverage matrix: what the engine claims to do, 
 tool("tools_list", "Every tool the engine exposes, with its description.", () => ok({ count: Object.keys(TOOLS).length, tools: Object.keys(TOOLS).sort().map(k => ({ name: k, describe: TOOLS[k].describe })) }));
 tool("session_stats", "Renders used, authored pixels, tool calls. The budget numbers.", () => ok({ renders: W.renders, authored_pixels: W.authoredPixels, calls: W.calls, cels: W.store.ids().length, clips: [...W.clips.keys()], cached_renders: W.cache.size }));
 tool("provenance", "Computed from edit history, never asserted.", (a) => ok(W.needProject().provenanceFor(a.sprite || "default")));
+
+require("./production-tools.js").register({ tool, TOOLS, W, celOf, paletteOfCel, ok, bad });
+require("./skeleton-tools.js").register({ tool, W, ok, bad });
+require("./contracts.js").attach(TOOLS);
 
 module.exports = { W, TOOLS, Workspace, ROOT, OUT, ok, bad, celOf, paletteOfCel };

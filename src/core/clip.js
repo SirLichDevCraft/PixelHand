@@ -57,6 +57,7 @@ class Clip {
     this.fps = opts.fps ?? null;               // declared, never defaulted silently
     this.events = opts.events ?? {};           // frameIndex -> [event names]
     this.notes = opts.notes ?? "";
+    if (!Array.isArray(this.directions) || !this.directions.length || new Set(this.directions).size!==this.directions.length || this.directions.some(d=>!DIRECTIONS.includes(d))) throw Object.assign(new Error("A clip needs a nonempty, unique set of declared directions"),{rule:"clip_directions"});
     if (this.template && !CLIP_TEMPLATES[this.template]) { const e = new Error(`unknown clip template '${this.template}'`); e.rule = "unknown_clip_template"; throw e; };
   }
 
@@ -72,7 +73,7 @@ class Clip {
   frameCountReport() {
     const counts = {};
     for (const d of this.directions) counts[d] = this.frames(d).length;
-    const distinct = [...new Set(Object.values(counts).filter(n => n > 0))];
+    const distinct = [...new Set(Object.values(counts))];
     return { counts, distinct, consistent: distinct.length <= 1 };
   }
 
@@ -335,7 +336,9 @@ class CelStore {
   restore(key) {
     const snap = this.snapshots.get(key);
     if (!snap) { const e = new Error(`no snapshot '${key}'`); e.rule = "no_snapshot"; throw e; };
-    this.cels.set(snap.id, snap.cel.clone(snap.cel.name));
+    const restored=snap.cel.clone(snap.cel.name),current=this.cels.get(snap.id);
+    if(current)Object.assign(current,restored);
+    this.cels.set(snap.id,current || restored);
     const filled = [...snap.cel.counts().values()].reduce((s, n) => s + n, 0);
     return { ok: true, id: snap.id, snapshot: key, filled_pixels: filled };
   }
