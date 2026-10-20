@@ -36,6 +36,12 @@ A building study with material ramps, warm lighting, and editable pixel source.
 
 [Editable project](showcase/farmhouse/art) · [Authoring script](bench/showcase-farmhouse.js)
 
+### Art direction target - top-down 2.5D dungeon scene
+
+![Original dungeon-scene art-direction target: a hooded delver raises a lantern before an ancient sealed doorway](showcase/goal/underground-shrine-reference.png)
+
+This is an **aspirational visual reference, not PixelHand output**. The goal is to build this kind of scene from separate, editable, palette-indexed game assets: top-down 2.5D floor and wall tiles, depth-sorted props, a character with authored directional poses and walk/attack animation, and layered lantern light, particles, and impact effects. The final scene should be assembled from those reusable sprites and reviewed both in motion and at native game scale, never delivered as one flattened image.
+
 These examples were authored and iterated with the engine. They demonstrate the drawing workflow; they are not autonomous model benchmark results.
 
 ## What you can build
